@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  background-color: yellow;
+  position: sticky;
+  top: 0;
+  padding: 1rem;
+}
+
+.leftside_header {
+  display: flex;
+  gap: 1rem;
+}
+
+.main_content {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 15rem;
+  padding: 1rem;
+  background-color: aqua;
+}
+
+.project_section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.task_container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1rem;
+  background-color: plum;
+}
