@@ -44,5 +44,49 @@
         <div class="task_list"></div>
       </div>
     </div>
+
+    <div class="add_task_form_div">
+      <form action="" method="post" class="add_task_form">
+        <input
+          type="text"
+          name="title"
+          id="title"
+          placeholder="Title: New Task"
+          required
+        />
+
+        <textarea
+          name="task_details"
+          id="task_details"
+          cols="70"
+          rows="15"
+          placeholder="Details: "
+        ></textarea>
+
+        <div class="dueDate">
+          <label for="dueDate">Due Date:</label>
+          <input type="date" name="dueDate" id="dueDate" />
+        </div>
+
+        <div class="task_priority">
+          <legend>Priority:</legend>
+          <div class="priority_switch">
+            <input type="radio" name="priority" id="low" value="low" />
+            <label for="low" class="label_priority">LOW</label>
+
+            <input type="radio" name="priority" id="medium" value="medium" />
+            <label for="medium" class="label_priority">MEDIUM</label>
+
+            <input type="radio" name="priority" id="high" value="high" />
+            <label for="high" class="label_priority">HIGH</label>
+
+            <div class="switch_indicator"></div>
+          </div>
+        </div>
+
+        <button type="submit">ADD TO DO</button>
+        <button type="reset">X</button>
+      </form>
+    </div>
   </body>
 </html>
