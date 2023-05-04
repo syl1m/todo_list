@@ -30,7 +30,23 @@
         <div class="project_section">
           <div class="project_title">Projects</div>
           <div class="project_directory"></div>
-          <div class="add_project">Add project button placeholder</div>
+          <div class="add_project_form hidden">
+            <form action="" method="post">
+              <input
+                type="text"
+                name="project_name"
+                id="project_name"
+                required
+              />
+              <div class="project_form_buttons">
+                <button type="submit" class="addProjectBtn">Add</button>
+                <button type="reset" class="cancelProjectBtn">Cancel</button>
+              </div>
+            </form>
+          </div>
+          <div class="add_project">
+            <button>Add Project</button>
+          </div>
         </div>
         <footer>
           Copyright © 2023 Sheng-Yau Lim
@@ -41,11 +57,14 @@
       </div>
       <div class="task_container">
         <div class="directory_name"></div>
+        <div class="addTaskBtn">
+          <button>Add Task</button>
+        </div>
         <div class="task_list"></div>
       </div>
     </div>
 
-    <div class="add_task_form_div">
+    <div class="add_task_form_div hidden">
       <form action="" method="post" class="add_task_form">
         <input
           type="text"
@@ -84,8 +103,8 @@
           </div>
         </div>
 
-        <button type="submit">ADD TO DO</button>
-        <button type="reset">X</button>
+        <button type="submit" class="addTaskFormBtn">ADD TO DO</button>
+        <button type="reset" class="cancelTaskFormBtn">X</button>
       </form>
     </div>
   </body>
