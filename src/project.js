@@ -7,4 +7,8 @@ export default class Project {
   addTask(task) {
     this.taskList.push(task);
   }
+
+  addProject(projectArray) {
+    this.push(projectArray);
+  }
 }
