@@ -1,4 +1,4 @@
-export default class Project {
+class Project {
   constructor(projectName) {
     this.projectName = projectName;
     this.taskList = [];
@@ -8,7 +8,16 @@ export default class Project {
     this.taskList.push(task);
   }
 
-  addProject(projectArray) {
-    this.push(projectArray);
+  projectToArray(array) {
+    array.push(this);
   }
+}
+
+// Function to create project from form
+export default function createProject() {
+  const projectName = document
+    .querySelector('input[name="project_name"]')
+    .value.trim();
+
+  return new Project(projectName);
 }
