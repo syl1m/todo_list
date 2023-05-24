@@ -25,7 +25,6 @@
           <div class="myday">My Day</div>
           <div class="upcoming">Upcoming</div>
           <div class="important">Important</div>
-          <div class="completed">Completed</div>
         </div>
         <div class="project_section">
           <div class="project_title">Projects</div>
@@ -40,6 +39,9 @@
                 pattern=".*\S.*"
                 title="Project name must contain a non-space character"
               />
+              <div class="duplicateNameErrorMessage hidden">
+                This project already exists. Enter a different name.
+              </div>
               <div class="project_form_buttons">
                 <button type="submit" class="addProjectBtn">Add</button>
                 <button type="reset" class="cancelProjectBtn">Cancel</button>

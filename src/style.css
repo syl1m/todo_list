@@ -36,7 +36,7 @@ header {
 .sidebar {
   display: flex;
   flex-direction: column;
-  flex-basis: 15rem;
+  width: 15rem;
   padding: 1rem;
   background-color: aqua;
 }
@@ -149,4 +149,14 @@ textarea {
 #high:checked ~ .switch_indicator {
   background: palevioletred;
   transform: translate(9rem, -50%);
+}
+
+/* Add Project Form */
+/* Project Render */
+.projectDivUI {
+  display: grid;
+  grid-template-columns: 1fr 5rem 1fr 1fr;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: red;
 }

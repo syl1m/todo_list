@@ -1,10 +1,16 @@
 import "./style.css";
 import createTask from "./task";
-import createProject from "./project";
-import { hideElement, displayElement, checkFormValidity } from "./UI";
+import createProject, { checkDupProjectName } from "./project";
+import {
+  hideElement,
+  displayElement,
+  checkFormValidity,
+  renderProjectsUI,
+} from "./UI";
 
 const tasksArray = [];
 const projectsArray = [];
+let currentProject = "";
 
 // Project Form Query Selectors
 const addProjectBtn = document.querySelector(".add_project button");
@@ -24,35 +30,52 @@ const cancelTaskBtn = document.querySelector("button.cancelTaskFormBtn");
 addProjectBtn.addEventListener("click", () => {
   displayElement(addProjectFormDiv);
   hideElement(addProjectBtn);
+  document.querySelector('input[name="project_name"]').focus();
 });
 
 submitProjectBtn.addEventListener("click", (e) => {
   if (!checkFormValidity("project_name")) return;
   e.preventDefault();
+  if (checkDupProjectName(projectsArray)) {
+    displayElement(document.querySelector(".duplicateNameErrorMessage"));
+    return;
+  }
+
+  const project = createProject();
+  project.projectToArray(projectsArray);
+  currentProject = project.projectName;
+  addProjectForm.reset();
+
   displayElement(addProjectBtn);
   hideElement(addProjectFormDiv);
-  createProject().projectToArray(projectsArray);
-  addProjectForm.reset();
+  hideElement(document.querySelector(".duplicateNameErrorMessage"));
+  renderProjectsUI(projectsArray);
+
   console.log(projectsArray);
 });
 
 cancelProjectBtn.addEventListener("click", () => {
   displayElement(addProjectBtn);
   hideElement(addProjectFormDiv);
+  hideElement(document.querySelector(".duplicateNameErrorMessage"));
 });
 
 addTaskBtn.addEventListener("click", () => {
   displayElement(addTaskFormDiv);
   hideElement(addTaskBtn);
+  document.querySelector('input[name="title"]').focus();
 });
 
 submitTaskBtn.addEventListener("click", (e) => {
   if (!checkFormValidity("title")) return;
   e.preventDefault();
-  displayElement(addTaskBtn);
-  hideElement(addTaskFormDiv);
+
   createTask().taskToArray(tasksArray);
   addTaskForm.reset();
+
+  displayElement(addTaskBtn);
+  hideElement(addTaskFormDiv);
+
   console.log(tasksArray);
 });
 

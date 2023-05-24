@@ -28,6 +28,8 @@ function getRadioCheckedValue(inputName) {
   return checkedValue;
 }
 
+// Function to associate task with project
+
 // Function to create task from form
 export default function createTask() {
   const title = document.querySelector('input[name="title"]').value.trim();
@@ -41,5 +43,4 @@ export default function createTask() {
 }
 
 // Function to edit task
-// Function to associate task with project
 // Function to mark task as complete

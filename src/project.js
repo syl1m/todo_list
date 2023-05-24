@@ -1,11 +1,6 @@
 class Project {
   constructor(projectName) {
     this.projectName = projectName;
-    this.taskList = [];
-  }
-
-  addTask(task) {
-    this.taskList.push(task);
   }
 
   projectToArray(array) {
@@ -20,4 +15,20 @@ export default function createProject() {
     .value.trim();
 
   return new Project(projectName);
+}
+
+// Function to edit project name
+// Function to prevent duplicate Project names
+export function checkDupProjectName(projectsArray) {
+  const name = document
+    .querySelector('input[name="project_name"]')
+    .value.trim();
+
+  for (let i = 0; i < projectsArray.length; i++) {
+    if (name === projectsArray[i].projectName) {
+      return true;
+    }
+  }
+
+  return false;
 }
