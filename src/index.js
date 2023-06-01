@@ -6,6 +6,7 @@ import {
   displayElement,
   checkFormValidity,
   renderProjectsUI,
+  renderTasksUI,
 } from "./UI";
 
 const tasksArray = [];
@@ -50,6 +51,7 @@ submitProjectBtn.addEventListener("click", (e) => {
   hideElement(addProjectFormDiv);
   hideElement(document.querySelector(".duplicateNameErrorMessage"));
   renderProjectsUI(projectsArray);
+  renderTasksUI(tasksArray, currentProject);
 
   console.log(projectsArray);
 });
@@ -70,11 +72,14 @@ submitTaskBtn.addEventListener("click", (e) => {
   if (!checkFormValidity("title")) return;
   e.preventDefault();
 
-  createTask().taskToArray(tasksArray);
+  const task = createTask(currentProject);
+  task.taskToArray(tasksArray);
   addTaskForm.reset();
 
   displayElement(addTaskBtn);
   hideElement(addTaskFormDiv);
+  if (currentProject) renderProjectsUI(projectsArray);
+  renderTasksUI(tasksArray, currentProject);
 
   console.log(tasksArray);
 });

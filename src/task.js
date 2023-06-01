@@ -1,10 +1,10 @@
 class Task {
-  constructor(title, details, dueDate, priority) {
+  constructor(title, details, dueDate, priority, project) {
     this.title = title;
     this.details = details;
     this.dueDate = dueDate;
     this.priority = priority;
-    this.project = "";
+    this.project = project;
     this.completed = "no";
   }
 
@@ -28,18 +28,17 @@ function getRadioCheckedValue(inputName) {
   return checkedValue;
 }
 
-// Function to associate task with project
-
 // Function to create task from form
-export default function createTask() {
+export default function createTask(currentProject) {
   const title = document.querySelector('input[name="title"]').value.trim();
   const details = document
     .querySelector('textarea[name="task_details"]')
     .value.trim();
   const dueDate = document.querySelector('input[name="dueDate"]').value;
   const priority = getRadioCheckedValue("priority");
+  const project = `${currentProject}`;
 
-  return new Task(title, details, dueDate, priority);
+  return new Task(title, details, dueDate, priority, project);
 }
 
 // Function to edit task

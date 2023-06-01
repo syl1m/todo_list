@@ -6,7 +6,58 @@ export function displayElement(element) {
   element.classList.remove("hidden");
 }
 
+function setPriorityStyling(priority, taskDiv) {
+  if (priority === "low") {
+    taskDiv.classList.add("low-priority");
+  } else if (priority === "medium") {
+    taskDiv.classList.add("medium-priority");
+  } else if (priority === "high") {
+    taskDiv.classList.add("high-priority");
+  }
+}
+
 // Render Tasks in DOM
+export function renderTasksUI(tasksArray, currentProject) {
+  const directoryName = document.querySelector(".directoryName");
+  const taskList = document.querySelector(".task_list");
+  if (currentProject) directoryName.textContent = `${currentProject}`;
+  taskList.textContent = "";
+
+  for (let i = 0; i < tasksArray.length; i++) {
+    if (tasksArray[i].project === currentProject) {
+      const taskDiv = document.createElement("div");
+      taskDiv.dataset.index = i;
+      taskDiv.classList.add("taskDivUI");
+
+      const checkbox = document.createElement("input");
+      const title = document.createElement("div");
+      const details = document.createElement("div");
+      const dueDate = document.createElement("div");
+      const editIcon = document.createElement("div");
+      const deleteIcon = document.createElement("div");
+
+      checkbox.setAttribute("type", "checkbox");
+      title.textContent = `${tasksArray[i].title}`;
+      details.textContent = "DETAILS";
+      dueDate.textContent = `${tasksArray[i].dueDate}`;
+      editIcon.textContent = "edit";
+      deleteIcon.textContent = "delete";
+
+      const priority = `${tasksArray[i].priority}`;
+      setPriorityStyling(priority, taskDiv);
+
+      taskDiv.appendChild(checkbox);
+      taskDiv.appendChild(title);
+      taskDiv.appendChild(details);
+      taskDiv.appendChild(dueDate);
+      taskDiv.appendChild(editIcon);
+      taskDiv.appendChild(deleteIcon);
+
+      taskList.appendChild(taskDiv);
+      // add event listeners for checkbox, details, edit, and delete
+    }
+  }
+}
 
 // Render Projects in DOM
 export function renderProjectsUI(projectsArray) {
@@ -45,6 +96,8 @@ export function renderProjectsUI(projectsArray) {
 // Create event listeners for tasks and project elements
 
 // Associate task and project DOM elements with index of array using data attribute
+
+// Render Non Project directories in sidebar
 
 // Function to check form validity
 export function checkFormValidity(formElementName) {
