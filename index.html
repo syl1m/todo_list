@@ -64,57 +64,66 @@
           <div class="directoryName">Home</div>
           <div class="dueDateSort">Due Date</div>
         </div>
+        <div class="task_list"></div>
+        <div class="add_task_form_div hidden">
+          <form action="" method="post" class="add_task_form">
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Title: New Task"
+              required
+              pattern=".*\S.*"
+              title="Task name must contain a non-space character"
+            />
+
+            <textarea
+              name="task_details"
+              id="task_details"
+              rows="5"
+              placeholder="Details: "
+            ></textarea>
+
+            <div class="dueDate">
+              <label for="dueDate">Due Date:</label>
+              <input type="date" name="dueDate" id="dueDate" />
+            </div>
+
+            <div class="task_priority">
+              <legend>Priority:</legend>
+              <div class="priority_switch">
+                <input
+                  type="radio"
+                  name="priority"
+                  id="low"
+                  value="low"
+                  checked
+                />
+                <label for="low" class="label_priority">LOW</label>
+
+                <input
+                  type="radio"
+                  name="priority"
+                  id="medium"
+                  value="medium"
+                />
+                <label for="medium" class="label_priority">MEDIUM</label>
+
+                <input type="radio" name="priority" id="high" value="high" />
+                <label for="high" class="label_priority">HIGH</label>
+
+                <div class="switch_indicator"></div>
+              </div>
+            </div>
+
+            <button type="submit" class="addTaskFormBtn">ADD TO DO</button>
+            <button type="reset" class="cancelTaskFormBtn">X</button>
+          </form>
+        </div>
         <div class="addTaskBtn">
           <button>Add Task</button>
         </div>
-        <div class="task_list"></div>
       </div>
-    </div>
-
-    <div class="add_task_form_div hidden">
-      <form action="" method="post" class="add_task_form">
-        <input
-          type="text"
-          name="title"
-          id="title"
-          placeholder="Title: New Task"
-          required
-          pattern=".*\S.*"
-          title="Task name must contain a non-space character"
-        />
-
-        <textarea
-          name="task_details"
-          id="task_details"
-          cols="70"
-          rows="15"
-          placeholder="Details: "
-        ></textarea>
-
-        <div class="dueDate">
-          <label for="dueDate">Due Date:</label>
-          <input type="date" name="dueDate" id="dueDate" />
-        </div>
-
-        <div class="task_priority">
-          <legend>Priority:</legend>
-          <div class="priority_switch">
-            <input type="radio" name="priority" id="low" value="low" checked />
-            <label for="low" class="label_priority">LOW</label>
-
-            <input type="radio" name="priority" id="medium" value="medium" />
-            <label for="medium" class="label_priority">MEDIUM</label>
-
-            <input type="radio" name="priority" id="high" value="high" />
-            <label for="high" class="label_priority">HIGH</label>
-
-            <div class="switch_indicator"></div>
-          </div>
-        </div>
-
-        <button type="submit" class="addTaskFormBtn">ADD TO DO</button>
-        <button type="reset" class="cancelTaskFormBtn">X</button>
-      </form>
     </div>
   </body>
 </html>
