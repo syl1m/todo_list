@@ -16,6 +16,16 @@ function setPriorityStyling(priority, taskDiv) {
   }
 }
 
+function countTasksInProject(project, tasksArray) {
+  let projectTaskCount = 0;
+  for (let i = 0; i < tasksArray.length; i++) {
+    if (tasksArray[i].project === project && tasksArray[i].completed === "no")
+      projectTaskCount++;
+  }
+
+  return projectTaskCount;
+}
+
 // Render Tasks in DOM
 export function renderTasksUI(tasksArray, currentProject) {
   const directoryName = document.querySelector(".directoryName");
@@ -60,7 +70,7 @@ export function renderTasksUI(tasksArray, currentProject) {
 }
 
 // Render Projects in DOM
-export function renderProjectsUI(projectsArray) {
+export function renderProjectsUI(projectsArray, tasksArray) {
   const projectDirectory = document.querySelector(".project_directory");
   projectDirectory.textContent = "";
 
@@ -75,7 +85,10 @@ export function renderProjectsUI(projectsArray) {
     const editIcon = document.createElement("div");
     const deleteProject = document.createElement("div");
 
-    totalTasks.textContent = "123";
+    totalTasks.textContent = countTasksInProject(
+      projectsArray[i].projectName,
+      tasksArray
+    );
     name.textContent = `${projectsArray[i].projectName}`;
     optionsIcon.textContent = ":";
     editIcon.textContent = "i";
@@ -94,8 +107,6 @@ export function renderProjectsUI(projectsArray) {
 }
 
 // Create event listeners for tasks and project elements
-
-// Associate task and project DOM elements with index of array using data attribute
 
 // Render Non Project directories in sidebar
 

@@ -50,7 +50,7 @@ submitProjectBtn.addEventListener("click", (e) => {
   displayElement(addProjectBtn);
   hideElement(addProjectFormDiv);
   hideElement(document.querySelector(".duplicateNameErrorMessage"));
-  renderProjectsUI(projectsArray);
+  renderProjectsUI(projectsArray, tasksArray);
   renderTasksUI(tasksArray, currentProject);
 
   console.log(projectsArray);
@@ -78,7 +78,7 @@ submitTaskBtn.addEventListener("click", (e) => {
 
   displayElement(addTaskBtn);
   hideElement(addTaskFormDiv);
-  if (currentProject) renderProjectsUI(projectsArray);
+  if (currentProject) renderProjectsUI(projectsArray, tasksArray);
   renderTasksUI(tasksArray, currentProject);
 
   console.log(tasksArray);
