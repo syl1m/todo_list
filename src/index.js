@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import "./style.css";
 import createTask from "./task";
 import createProject, { checkDupProjectName } from "./project";
@@ -52,6 +53,7 @@ submitProjectBtn.addEventListener("click", (e) => {
   hideElement(document.querySelector(".duplicateNameErrorMessage"));
   renderProjectsUI(projectsArray, tasksArray);
   renderTasksUI(tasksArray, currentProject);
+  createProjectEventListeners();
 
   console.log(projectsArray);
 });
@@ -78,7 +80,10 @@ submitTaskBtn.addEventListener("click", (e) => {
 
   displayElement(addTaskBtn);
   hideElement(addTaskFormDiv);
-  if (currentProject) renderProjectsUI(projectsArray, tasksArray);
+  if (currentProject) {
+    renderProjectsUI(projectsArray, tasksArray);
+    createProjectEventListeners();
+  }
   renderTasksUI(tasksArray, currentProject);
 
   console.log(tasksArray);
@@ -88,3 +93,17 @@ cancelTaskBtn.addEventListener("click", () => {
   displayElement(addTaskBtn);
   hideElement(addTaskFormDiv);
 });
+
+// Functions
+function createProjectEventListeners() {
+  const projects = document.querySelectorAll(".projectNameEventListener");
+  projects.forEach((project) =>
+    project.addEventListener("click", (e) => {
+      const i = e.target.dataset.index;
+      const name = projectsArray[i].projectName;
+
+      currentProject = name;
+      renderTasksUI(tasksArray, currentProject);
+    })
+  );
+}

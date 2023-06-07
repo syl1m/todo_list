@@ -17,7 +17,7 @@ function setPriorityStyling(priority, taskDiv) {
 }
 
 function countTasksInProject(project, tasksArray) {
-  let projectTaskCount = 0;
+  let projectTaskCount = "";
   for (let i = 0; i < tasksArray.length; i++) {
     if (tasksArray[i].project === project && tasksArray[i].completed === "no")
       projectTaskCount++;
@@ -90,12 +90,12 @@ export function renderProjectsUI(projectsArray, tasksArray) {
       tasksArray
     );
     name.textContent = `${projectsArray[i].projectName}`;
+    name.classList.add("projectNameEventListener");
+    name.dataset.index = i;
     optionsIcon.textContent = ":";
     editIcon.textContent = "i";
     deleteProject.textContent = "X";
 
-    // Add event listener to options icon, hidden until hover over projectdiv element
-    // Add event listeners for edit name and delete project
     projectDiv.appendChild(totalTasks);
     projectDiv.appendChild(name);
     projectDiv.appendChild(optionsIcon);
@@ -103,6 +103,8 @@ export function renderProjectsUI(projectsArray, tasksArray) {
     optionsIcon.appendChild(deleteProject);
 
     projectDirectory.appendChild(projectDiv);
+    // Add event listener to options icon, hidden until hover over projectdiv element
+    // Add event listeners for edit name and delete project
   }
 }
 
