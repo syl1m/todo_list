@@ -156,6 +156,18 @@ textarea {
   transform: translate(9rem, -50%);
 }
 
+/* Non Project Directories Sidebar */
+.task_directory {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nonProjectDirectoryDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
 /* Add Project Form */
 /* Project Render */
 .projectDivUI {

@@ -8,6 +8,7 @@ import {
   checkFormValidity,
   renderProjectsUI,
   renderTasksUI,
+  renderNonProjectsUI,
 } from "./UI";
 
 const tasksArray = [];
@@ -85,6 +86,7 @@ submitTaskBtn.addEventListener("click", (e) => {
     createProjectEventListeners();
   }
   renderTasksUI(tasksArray, currentProject);
+  renderNonProjectsUI(tasksArray);
 
   console.log(tasksArray);
 });

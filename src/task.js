@@ -1,3 +1,5 @@
+import { format, parse } from "date-fns";
+
 class Task {
   constructor(title, details, dueDate, priority, project) {
     this.title = title;
@@ -34,7 +36,14 @@ export default function createTask(currentProject) {
   const details = document
     .querySelector('textarea[name="task_details"]')
     .value.trim();
-  const dueDate = document.querySelector('input[name="dueDate"]').value;
+  const dueDate = format(
+    parse(
+      document.querySelector('input[name="dueDate"]').value,
+      "yyyy-MM-dd",
+      new Date()
+    ),
+    "MM-dd-yyyy"
+  );
   const priority = getRadioCheckedValue("priority");
   const project = `${currentProject}`;
 

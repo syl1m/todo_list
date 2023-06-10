@@ -1,3 +1,5 @@
+import { parse, addDays, compareAsc, startOfDay } from "date-fns";
+
 export function hideElement(element) {
   element.classList.add("hidden");
 }
@@ -24,6 +26,68 @@ function countTasksInProject(project, tasksArray) {
   }
 
   return projectTaskCount;
+}
+
+function countTasksInHome(tasksArray) {
+  let taskCount = "";
+  for (let i = 0; i < tasksArray.length; i++) {
+    if (tasksArray[i].completed === "no") taskCount++;
+  }
+
+  return taskCount;
+}
+
+function countTasksInToday(tasksArray) {
+  let taskCount = "";
+  const todayDate = startOfDay(new Date());
+
+  for (let i = 0; i < tasksArray.length; i++) {
+    if (tasksArray[i].completed === "no") {
+      const taskDueDate = parse(
+        tasksArray[i].dueDate,
+        "MM-dd-yyyy",
+        new Date()
+      );
+      if (compareAsc(todayDate, taskDueDate) === 0) taskCount++;
+    }
+  }
+
+  return taskCount;
+}
+
+function countTasksInWeek(tasksArray) {
+  let taskCount = "";
+  const todayDate = startOfDay(new Date());
+  const sevenDaysFromTodayDate = addDays(todayDate, 7);
+
+  for (let i = 0; i < tasksArray.length; i++) {
+    if (tasksArray[i].completed === "no") {
+      const taskDueDate = parse(
+        tasksArray[i].dueDate,
+        "MM-dd-yyyy",
+        new Date()
+      );
+      if (
+        !(
+          compareAsc(taskDueDate, todayDate) === -1 ||
+          compareAsc(taskDueDate, sevenDaysFromTodayDate) === 1
+        )
+      )
+        taskCount++;
+    }
+  }
+
+  return taskCount;
+}
+
+function countTasksInImportant(tasksArray) {
+  let taskCount = "";
+  for (let i = 0; i < tasksArray.length; i++) {
+    if (tasksArray[i].completed === "no" && tasksArray[i].priority === "high")
+      taskCount++;
+  }
+
+  return taskCount;
 }
 
 // Render Tasks in DOM
@@ -108,9 +172,18 @@ export function renderProjectsUI(projectsArray, tasksArray) {
   }
 }
 
-// Create event listeners for tasks and project elements
+// Render Non Project directories sidebar and tasks list
+export function renderNonProjectsUI(tasksArray) {
+  const homeTaskCount = document.querySelector(".home .taskCount");
+  const todayTaskCount = document.querySelector(".today .taskCount");
+  const weekTaskCount = document.querySelector(".week .taskCount");
+  const importantTaskCount = document.querySelector(".important .taskCount");
 
-// Render Non Project directories in sidebar
+  homeTaskCount.textContent = countTasksInHome(tasksArray);
+  todayTaskCount.textContent = countTasksInToday(tasksArray);
+  weekTaskCount.textContent = countTasksInWeek(tasksArray);
+  importantTaskCount.textContent = countTasksInImportant(tasksArray);
+}
 
 // Function to check form validity
 export function checkFormValidity(formElementName) {
