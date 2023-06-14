@@ -9,6 +9,10 @@ import {
   renderProjectsUI,
   renderTasksUI,
   renderNonProjectsUI,
+  renderTasksInHome,
+  renderTasksInToday,
+  renderTasksInWeek,
+  renderTasksInImportant,
 } from "./UI";
 
 const tasksArray = [];
@@ -34,6 +38,7 @@ addProjectBtn.addEventListener("click", () => {
   displayElement(addProjectFormDiv);
   hideElement(addProjectBtn);
   document.querySelector('input[name="project_name"]').focus();
+  addTaskBtn.disabled = true;
 });
 
 submitProjectBtn.addEventListener("click", (e) => {
@@ -56,19 +61,22 @@ submitProjectBtn.addEventListener("click", (e) => {
   renderTasksUI(tasksArray, currentProject);
   createProjectEventListeners();
 
-  console.log(projectsArray);
+  displayElement(addTaskBtn);
+  addTaskBtn.disabled = false;
 });
 
 cancelProjectBtn.addEventListener("click", () => {
   displayElement(addProjectBtn);
   hideElement(addProjectFormDiv);
   hideElement(document.querySelector(".duplicateNameErrorMessage"));
+  addTaskBtn.disabled = false;
 });
 
 addTaskBtn.addEventListener("click", () => {
   displayElement(addTaskFormDiv);
   hideElement(addTaskBtn);
   document.querySelector('input[name="title"]').focus();
+  addProjectBtn.disabled = true;
 });
 
 submitTaskBtn.addEventListener("click", (e) => {
@@ -84,19 +92,37 @@ submitTaskBtn.addEventListener("click", (e) => {
   if (currentProject) {
     renderProjectsUI(projectsArray, tasksArray);
     createProjectEventListeners();
+    renderTasksUI(tasksArray, currentProject);
+  } else {
+    renderTasksInHome(tasksArray);
   }
-  renderTasksUI(tasksArray, currentProject);
   renderNonProjectsUI(tasksArray);
 
-  console.log(tasksArray);
+  addProjectBtn.disabled = false;
 });
 
 cancelTaskBtn.addEventListener("click", () => {
   displayElement(addTaskBtn);
   hideElement(addTaskFormDiv);
+  addProjectBtn.disabled = false;
 });
 
+createNonProjectDirectoryEventListeners();
+
 // Functions
+function closeAndResetForms() {
+  addProjectForm.reset();
+  addTaskForm.reset();
+  addProjectBtn.disabled = false;
+  addTaskBtn.disabled = false;
+
+  displayElement(addProjectBtn);
+  displayElement(addTaskBtn);
+  hideElement(addProjectFormDiv);
+  hideElement(document.querySelector(".duplicateNameErrorMessage"));
+  hideElement(addTaskFormDiv);
+}
+
 function createProjectEventListeners() {
   const projects = document.querySelectorAll(".projectNameEventListener");
   projects.forEach((project) =>
@@ -106,6 +132,41 @@ function createProjectEventListeners() {
 
       currentProject = name;
       renderTasksUI(tasksArray, currentProject);
+      closeAndResetForms();
     })
   );
+}
+
+function createNonProjectDirectoryEventListeners() {
+  const home = document.querySelector(".home.nonProjectDirectoryDiv");
+  const today = document.querySelector(".today.nonProjectDirectoryDiv");
+  const week = document.querySelector(".week.nonProjectDirectoryDiv");
+  const important = document.querySelector(".important.nonProjectDirectoryDiv");
+
+  home.addEventListener("click", () => {
+    currentProject = "";
+    renderTasksInHome(tasksArray);
+    closeAndResetForms();
+  });
+
+  today.addEventListener("click", () => {
+    currentProject = "";
+    renderTasksInToday(tasksArray);
+    closeAndResetForms();
+    hideElement(addTaskBtn);
+  });
+
+  week.addEventListener("click", () => {
+    currentProject = "";
+    renderTasksInWeek(tasksArray);
+    closeAndResetForms();
+    hideElement(addTaskBtn);
+  });
+
+  important.addEventListener("click", () => {
+    currentProject = "";
+    renderTasksInImportant(tasksArray);
+    closeAndResetForms();
+    hideElement(addTaskBtn);
+  });
 }
