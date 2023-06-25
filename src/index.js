@@ -18,6 +18,7 @@ import {
 
 const tasksArray = [];
 const projectsArray = [];
+const dateFormat = "MMM do, yyyy";
 let currentProject = "";
 
 // Project Form Query Selectors
@@ -86,7 +87,7 @@ submitTaskBtn.addEventListener("click", (e) => {
   if (!checkFormValidity("dueDate")) return;
   e.preventDefault();
 
-  const task = createTask(currentProject);
+  const task = createTask(currentProject, dateFormat);
   task.taskToArray(tasksArray);
   addTaskForm.reset();
 
@@ -99,7 +100,7 @@ submitTaskBtn.addEventListener("click", (e) => {
   } else {
     renderTasksInHome(tasksArray);
   }
-  renderNonProjectsUI(tasksArray);
+  renderNonProjectsUI(tasksArray, dateFormat);
 
   addProjectBtn.disabled = false;
 });
@@ -154,14 +155,14 @@ function createNonProjectDirectoryEventListeners() {
 
   today.addEventListener("click", () => {
     currentProject = "";
-    renderTasksInToday(tasksArray);
+    renderTasksInToday(tasksArray, dateFormat);
     closeAndResetForms();
     hideElement(addTaskBtn);
   });
 
   week.addEventListener("click", () => {
     currentProject = "";
-    renderTasksInWeek(tasksArray);
+    renderTasksInWeek(tasksArray, dateFormat);
     closeAndResetForms();
     hideElement(addTaskBtn);
   });

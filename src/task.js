@@ -31,7 +31,7 @@ function getRadioCheckedValue(inputName) {
 }
 
 // Function to create task from form
-export default function createTask(currentProject) {
+export default function createTask(currentProject, dateFormat) {
   const title = document.querySelector('input[name="title"]').value.trim();
   const details = document
     .querySelector('textarea[name="task_details"]')
@@ -42,7 +42,7 @@ export default function createTask(currentProject) {
       "yyyy-MM-dd",
       new Date()
     ),
-    "MM-dd-yyyy"
+    dateFormat
   );
   const priority = getRadioCheckedValue("priority");
   const project = `${currentProject}`;

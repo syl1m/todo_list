@@ -37,17 +37,13 @@ function countTasksInHome(tasksArray) {
   return taskCount;
 }
 
-function countTasksInToday(tasksArray) {
+function countTasksInToday(tasksArray, dateFormat) {
   let taskCount = "";
   const todayDate = startOfDay(new Date());
 
   for (let i = 0; i < tasksArray.length; i++) {
     if (tasksArray[i].completed === "no") {
-      const taskDueDate = parse(
-        tasksArray[i].dueDate,
-        "MM-dd-yyyy",
-        new Date()
-      );
+      const taskDueDate = parse(tasksArray[i].dueDate, dateFormat, new Date());
       if (compareAsc(todayDate, taskDueDate) === 0) taskCount++;
     }
   }
@@ -55,18 +51,14 @@ function countTasksInToday(tasksArray) {
   return taskCount;
 }
 
-function countTasksInWeek(tasksArray) {
+function countTasksInWeek(tasksArray, dateFormat) {
   let taskCount = "";
   const todayDate = startOfDay(new Date());
   const sevenDaysFromTodayDate = addDays(todayDate, 7);
 
   for (let i = 0; i < tasksArray.length; i++) {
     if (tasksArray[i].completed === "no") {
-      const taskDueDate = parse(
-        tasksArray[i].dueDate,
-        "MM-dd-yyyy",
-        new Date()
-      );
+      const taskDueDate = parse(tasksArray[i].dueDate, dateFormat, new Date());
       if (
         !(
           compareAsc(taskDueDate, todayDate) === -1 ||
@@ -131,7 +123,7 @@ export function renderTasksInHome(tasksArray) {
 }
 
 // Render Tasks for Today
-export function renderTasksInToday(tasksArray) {
+export function renderTasksInToday(tasksArray, dateFormat) {
   const directoryName = document.querySelector(".directoryName");
   const taskList = document.querySelector(".task_list");
   const todayDate = startOfDay(new Date());
@@ -140,7 +132,7 @@ export function renderTasksInToday(tasksArray) {
   taskList.textContent = "";
 
   for (let i = 0; i < tasksArray.length; i++) {
-    const taskDueDate = parse(tasksArray[i].dueDate, "MM-dd-yyyy", new Date());
+    const taskDueDate = parse(tasksArray[i].dueDate, dateFormat, new Date());
     if (compareAsc(todayDate, taskDueDate) === 0) {
       const taskDiv = document.createElement("div");
       taskDiv.dataset.index = i;
@@ -176,7 +168,7 @@ export function renderTasksInToday(tasksArray) {
 }
 
 // Render Tasks for Week
-export function renderTasksInWeek(tasksArray) {
+export function renderTasksInWeek(tasksArray, dateFormat) {
   const directoryName = document.querySelector(".directoryName");
   const taskList = document.querySelector(".task_list");
   const todayDate = startOfDay(new Date());
@@ -186,7 +178,7 @@ export function renderTasksInWeek(tasksArray) {
   taskList.textContent = "";
 
   for (let i = 0; i < tasksArray.length; i++) {
-    const taskDueDate = parse(tasksArray[i].dueDate, "MM-dd-yyyy", new Date());
+    const taskDueDate = parse(tasksArray[i].dueDate, dateFormat, new Date());
     if (
       !(
         compareAsc(taskDueDate, todayDate) === -1 ||
@@ -350,15 +342,15 @@ export function renderProjectsUI(projectsArray, tasksArray) {
 }
 
 // Render Non Project directories sidebar task count
-export function renderNonProjectsUI(tasksArray) {
+export function renderNonProjectsUI(tasksArray, dateFormat) {
   const homeTaskCount = document.querySelector(".home .taskCount");
   const todayTaskCount = document.querySelector(".today .taskCount");
   const weekTaskCount = document.querySelector(".week .taskCount");
   const importantTaskCount = document.querySelector(".important .taskCount");
 
   homeTaskCount.textContent = countTasksInHome(tasksArray);
-  todayTaskCount.textContent = countTasksInToday(tasksArray);
-  weekTaskCount.textContent = countTasksInWeek(tasksArray);
+  todayTaskCount.textContent = countTasksInToday(tasksArray, dateFormat);
+  weekTaskCount.textContent = countTasksInWeek(tasksArray, dateFormat);
   importantTaskCount.textContent = countTasksInImportant(tasksArray);
 }
 
