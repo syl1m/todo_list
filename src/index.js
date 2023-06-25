@@ -1,5 +1,6 @@
 /* eslint-disable no-use-before-define */
 import "./style.css";
+import { format } from "date-fns";
 import createTask from "./task";
 import createProject, { checkDupProjectName } from "./project";
 import {
@@ -75,12 +76,14 @@ cancelProjectBtn.addEventListener("click", () => {
 addTaskBtn.addEventListener("click", () => {
   displayElement(addTaskFormDiv);
   hideElement(addTaskBtn);
+  defaultFormDateToToday();
   document.querySelector('input[name="title"]').focus();
   addProjectBtn.disabled = true;
 });
 
 submitTaskBtn.addEventListener("click", (e) => {
   if (!checkFormValidity("title")) return;
+  if (!checkFormValidity("dueDate")) return;
   e.preventDefault();
 
   const task = createTask(currentProject);
@@ -169,4 +172,9 @@ function createNonProjectDirectoryEventListeners() {
     closeAndResetForms();
     hideElement(addTaskBtn);
   });
+}
+
+function defaultFormDateToToday() {
+  const dateInput = document.getElementById("dueDate");
+  dateInput.value = format(new Date(), "yyyy-MM-dd");
 }
