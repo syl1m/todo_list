@@ -50,6 +50,7 @@
                 required
                 pattern=".*\S.*"
                 title="Project name must contain a non-space character"
+                maxlength="25"
               />
               <div class="duplicateNameErrorMessage hidden">
                 This project already exists. Enter a different name.
@@ -87,6 +88,7 @@
               required
               pattern=".*\S.*"
               title="Task name must contain a non-space character"
+              maxlength="60"
             />
 
             <textarea
@@ -94,6 +96,7 @@
               id="task_details"
               rows="5"
               placeholder="Details: "
+              maxlength="250"
             ></textarea>
 
             <div class="dueDate">
