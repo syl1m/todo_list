@@ -82,6 +82,39 @@ function countTasksInImportant(tasksArray) {
   return taskCount;
 }
 
+// Create Task Div function
+function createTaskDiv(tasksArray, i) {
+  const taskDiv = document.createElement("div");
+  taskDiv.dataset.index = i;
+  taskDiv.classList.add("taskDivUI");
+
+  const checkbox = document.createElement("input");
+  const title = document.createElement("div");
+  const details = document.createElement("div");
+  const dueDate = document.createElement("div");
+  const editIcon = document.createElement("div");
+  const deleteIcon = document.createElement("div");
+
+  checkbox.setAttribute("type", "checkbox");
+  title.textContent = `${tasksArray[i].title}`;
+  details.textContent = "DETAILS";
+  dueDate.textContent = `${tasksArray[i].dueDate}`;
+  editIcon.textContent = "edit";
+  deleteIcon.textContent = "delete";
+
+  const priority = `${tasksArray[i].priority}`;
+  setPriorityStyling(priority, taskDiv);
+
+  taskDiv.appendChild(checkbox);
+  taskDiv.appendChild(title);
+  taskDiv.appendChild(details);
+  taskDiv.appendChild(dueDate);
+  taskDiv.appendChild(editIcon);
+  taskDiv.appendChild(deleteIcon);
+
+  return taskDiv;
+}
+
 // Render Tasks for Home
 export function renderTasksInHome(tasksArray) {
   const directoryName = document.querySelector(".directoryName");
@@ -90,34 +123,7 @@ export function renderTasksInHome(tasksArray) {
   taskList.textContent = "";
 
   for (let i = 0; i < tasksArray.length; i++) {
-    const taskDiv = document.createElement("div");
-    taskDiv.dataset.index = i;
-    taskDiv.classList.add("taskDivUI");
-
-    const checkbox = document.createElement("input");
-    const title = document.createElement("div");
-    const details = document.createElement("div");
-    const dueDate = document.createElement("div");
-    const editIcon = document.createElement("div");
-    const deleteIcon = document.createElement("div");
-
-    checkbox.setAttribute("type", "checkbox");
-    title.textContent = `${tasksArray[i].title}`;
-    details.textContent = "DETAILS";
-    dueDate.textContent = `${tasksArray[i].dueDate}`;
-    editIcon.textContent = "edit";
-    deleteIcon.textContent = "delete";
-
-    const priority = `${tasksArray[i].priority}`;
-    setPriorityStyling(priority, taskDiv);
-
-    taskDiv.appendChild(checkbox);
-    taskDiv.appendChild(title);
-    taskDiv.appendChild(details);
-    taskDiv.appendChild(dueDate);
-    taskDiv.appendChild(editIcon);
-    taskDiv.appendChild(deleteIcon);
-
+    const taskDiv = createTaskDiv(tasksArray, i);
     taskList.appendChild(taskDiv);
   }
 }
@@ -134,34 +140,7 @@ export function renderTasksInToday(tasksArray, dateFormat) {
   for (let i = 0; i < tasksArray.length; i++) {
     const taskDueDate = parse(tasksArray[i].dueDate, dateFormat, new Date());
     if (compareAsc(todayDate, taskDueDate) === 0) {
-      const taskDiv = document.createElement("div");
-      taskDiv.dataset.index = i;
-      taskDiv.classList.add("taskDivUI");
-
-      const checkbox = document.createElement("input");
-      const title = document.createElement("div");
-      const details = document.createElement("div");
-      const dueDate = document.createElement("div");
-      const editIcon = document.createElement("div");
-      const deleteIcon = document.createElement("div");
-
-      checkbox.setAttribute("type", "checkbox");
-      title.textContent = `${tasksArray[i].title}`;
-      details.textContent = "DETAILS";
-      dueDate.textContent = `${tasksArray[i].dueDate}`;
-      editIcon.textContent = "edit";
-      deleteIcon.textContent = "delete";
-
-      const priority = `${tasksArray[i].priority}`;
-      setPriorityStyling(priority, taskDiv);
-
-      taskDiv.appendChild(checkbox);
-      taskDiv.appendChild(title);
-      taskDiv.appendChild(details);
-      taskDiv.appendChild(dueDate);
-      taskDiv.appendChild(editIcon);
-      taskDiv.appendChild(deleteIcon);
-
+      const taskDiv = createTaskDiv(tasksArray, i);
       taskList.appendChild(taskDiv);
     }
   }
@@ -185,34 +164,7 @@ export function renderTasksInWeek(tasksArray, dateFormat) {
         compareAsc(taskDueDate, sevenDaysFromTodayDate) === 1
       )
     ) {
-      const taskDiv = document.createElement("div");
-      taskDiv.dataset.index = i;
-      taskDiv.classList.add("taskDivUI");
-
-      const checkbox = document.createElement("input");
-      const title = document.createElement("div");
-      const details = document.createElement("div");
-      const dueDate = document.createElement("div");
-      const editIcon = document.createElement("div");
-      const deleteIcon = document.createElement("div");
-
-      checkbox.setAttribute("type", "checkbox");
-      title.textContent = `${tasksArray[i].title}`;
-      details.textContent = "DETAILS";
-      dueDate.textContent = `${tasksArray[i].dueDate}`;
-      editIcon.textContent = "edit";
-      deleteIcon.textContent = "delete";
-
-      const priority = `${tasksArray[i].priority}`;
-      setPriorityStyling(priority, taskDiv);
-
-      taskDiv.appendChild(checkbox);
-      taskDiv.appendChild(title);
-      taskDiv.appendChild(details);
-      taskDiv.appendChild(dueDate);
-      taskDiv.appendChild(editIcon);
-      taskDiv.appendChild(deleteIcon);
-
+      const taskDiv = createTaskDiv(tasksArray, i);
       taskList.appendChild(taskDiv);
     }
   }
@@ -227,34 +179,7 @@ export function renderTasksInImportant(tasksArray) {
 
   for (let i = 0; i < tasksArray.length; i++) {
     if (tasksArray[i].priority === "high") {
-      const taskDiv = document.createElement("div");
-      taskDiv.dataset.index = i;
-      taskDiv.classList.add("taskDivUI");
-
-      const checkbox = document.createElement("input");
-      const title = document.createElement("div");
-      const details = document.createElement("div");
-      const dueDate = document.createElement("div");
-      const editIcon = document.createElement("div");
-      const deleteIcon = document.createElement("div");
-
-      checkbox.setAttribute("type", "checkbox");
-      title.textContent = `${tasksArray[i].title}`;
-      details.textContent = "DETAILS";
-      dueDate.textContent = `${tasksArray[i].dueDate}`;
-      editIcon.textContent = "edit";
-      deleteIcon.textContent = "delete";
-
-      const priority = `${tasksArray[i].priority}`;
-      setPriorityStyling(priority, taskDiv);
-
-      taskDiv.appendChild(checkbox);
-      taskDiv.appendChild(title);
-      taskDiv.appendChild(details);
-      taskDiv.appendChild(dueDate);
-      taskDiv.appendChild(editIcon);
-      taskDiv.appendChild(deleteIcon);
-
+      const taskDiv = createTaskDiv(tasksArray, i);
       taskList.appendChild(taskDiv);
     }
   }
@@ -269,34 +194,7 @@ export function renderTasksUI(tasksArray, currentProject) {
 
   for (let i = 0; i < tasksArray.length; i++) {
     if (tasksArray[i].project === currentProject) {
-      const taskDiv = document.createElement("div");
-      taskDiv.dataset.index = i;
-      taskDiv.classList.add("taskDivUI");
-
-      const checkbox = document.createElement("input");
-      const title = document.createElement("div");
-      const details = document.createElement("div");
-      const dueDate = document.createElement("div");
-      const editIcon = document.createElement("div");
-      const deleteIcon = document.createElement("div");
-
-      checkbox.setAttribute("type", "checkbox");
-      title.textContent = `${tasksArray[i].title}`;
-      details.textContent = "DETAILS";
-      dueDate.textContent = `${tasksArray[i].dueDate}`;
-      editIcon.textContent = "edit";
-      deleteIcon.textContent = "delete";
-
-      const priority = `${tasksArray[i].priority}`;
-      setPriorityStyling(priority, taskDiv);
-
-      taskDiv.appendChild(checkbox);
-      taskDiv.appendChild(title);
-      taskDiv.appendChild(details);
-      taskDiv.appendChild(dueDate);
-      taskDiv.appendChild(editIcon);
-      taskDiv.appendChild(deleteIcon);
-
+      const taskDiv = createTaskDiv(tasksArray, i);
       taskList.appendChild(taskDiv);
     }
   }
