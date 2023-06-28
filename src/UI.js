@@ -82,7 +82,6 @@ function countTasksInImportant(tasksArray) {
   return taskCount;
 }
 
-// Create Task Div function
 function createTaskDiv(tasksArray, i) {
   const taskDiv = document.createElement("div");
   taskDiv.dataset.index = i;
@@ -101,6 +100,18 @@ function createTaskDiv(tasksArray, i) {
   dueDate.textContent = `${tasksArray[i].dueDate}`;
   editIcon.textContent = "edit";
   deleteIcon.textContent = "delete";
+
+  checkbox.dataset.index = i;
+  details.dataset.index = i;
+  editIcon.dataset.index = i;
+  deleteIcon.dataset.index = i;
+
+  checkbox.classList.add("taskCheckbox");
+  title.classList.add("taskTitle");
+  details.classList.add("taskDetails");
+  dueDate.classList.add("taskDueDate");
+  editIcon.classList.add("taskEditIcon");
+  deleteIcon.classList.add("taskDeleteIcon");
 
   const priority = `${tasksArray[i].priority}`;
   setPriorityStyling(priority, taskDiv);

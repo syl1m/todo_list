@@ -220,6 +220,10 @@ footer {
   min-width: 50rem;
 }
 
+.taskDetails {
+  justify-self: right;
+}
+
 .low-priority {
   border-left: 0.5rem solid green;
 }
