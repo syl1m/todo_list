@@ -65,6 +65,10 @@ submitProjectBtn.addEventListener("click", (e) => {
 
   displayElement(addTaskBtn);
   addTaskBtn.disabled = false;
+
+  const lastProjectElement =
+    document.querySelector(".project_directory").lastElementChild;
+  lastProjectElement.scrollIntoView({ behavior: "smooth", inline: "start" });
 });
 
 cancelProjectBtn.addEventListener("click", () => {
@@ -103,6 +107,9 @@ submitTaskBtn.addEventListener("click", (e) => {
   renderNonProjectsUI(tasksArray, dateFormat);
 
   addProjectBtn.disabled = false;
+
+  const lastTaskElement = document.querySelector(".task_list").lastElementChild;
+  lastTaskElement.scrollIntoView({ behavior: "smooth", inline: "start" });
 });
 
 cancelTaskBtn.addEventListener("click", () => {
@@ -127,6 +134,12 @@ function closeAndResetForms() {
   hideElement(addTaskFormDiv);
 }
 
+function scrollTaskListToTop() {
+  const firstTaskElement =
+    document.querySelector(".task_list").firstElementChild;
+  firstTaskElement.scrollIntoView({ behavior: "instant", inline: "start" });
+}
+
 function createProjectEventListeners() {
   const projects = document.querySelectorAll(".projectNameEventListener");
   projects.forEach((project) =>
@@ -137,6 +150,7 @@ function createProjectEventListeners() {
       currentProject = name;
       renderTasksUI(tasksArray, currentProject);
       closeAndResetForms();
+      scrollTaskListToTop();
     })
   );
 }
@@ -151,12 +165,14 @@ function createNonProjectDirectoryEventListeners() {
     currentProject = "";
     renderTasksInHome(tasksArray);
     closeAndResetForms();
+    scrollTaskListToTop();
   });
 
   today.addEventListener("click", () => {
     currentProject = "";
     renderTasksInToday(tasksArray, dateFormat);
     closeAndResetForms();
+    scrollTaskListToTop();
     hideElement(addTaskBtn);
   });
 
@@ -164,6 +180,7 @@ function createNonProjectDirectoryEventListeners() {
     currentProject = "";
     renderTasksInWeek(tasksArray, dateFormat);
     closeAndResetForms();
+    scrollTaskListToTop();
     hideElement(addTaskBtn);
   });
 
@@ -171,6 +188,7 @@ function createNonProjectDirectoryEventListeners() {
     currentProject = "";
     renderTasksInImportant(tasksArray);
     closeAndResetForms();
+    scrollTaskListToTop();
     hideElement(addTaskBtn);
   });
 }
