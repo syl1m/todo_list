@@ -137,7 +137,8 @@ function closeAndResetForms() {
 function scrollTaskListToTop() {
   const firstTaskElement =
     document.querySelector(".task_list").firstElementChild;
-  firstTaskElement.scrollIntoView({ behavior: "instant", inline: "start" });
+  if (firstTaskElement)
+    firstTaskElement.scrollIntoView({ behavior: "instant", inline: "start" });
 }
 
 function createProjectEventListeners() {
