@@ -232,4 +232,33 @@ function createTaskEventListeners() {
       taskDiv.classList.toggle("completedTask");
     })
   );
+
+  details.forEach((detail) =>
+    detail.addEventListener("click", (e) => {
+      const i = e.target.dataset.index;
+      const taskDiv = document.querySelector(`.taskDivUI[data-index="${i}"]`);
+      const taskDetailsDiv = document.createElement("div");
+      const previousTaskDetailsDiv = document.querySelector(".taskDetailsDiv");
+
+      if (previousTaskDetailsDiv) {
+        const previousTaskIndex = previousTaskDetailsDiv.dataset.index;
+        if (previousTaskIndex === i) {
+          previousTaskDetailsDiv.remove();
+          return;
+        }
+        previousTaskDetailsDiv.remove();
+      }
+
+      if (tasksArray[i].details) {
+        taskDetailsDiv.textContent = `${tasksArray[i].details}`;
+      } else {
+        taskDetailsDiv.textContent = "No details";
+      }
+
+      taskDetailsDiv.classList.add("taskDetailsDiv");
+      taskDetailsDiv.dataset.index = i;
+      taskDiv.insertAdjacentElement("afterend", taskDetailsDiv);
+      taskDetailsDiv.scrollIntoView({ behavior: "smooth", inline: "start" });
+    })
+  );
 }
