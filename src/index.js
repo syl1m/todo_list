@@ -8,7 +8,7 @@ import {
   displayElement,
   checkFormValidity,
   renderProjectsUI,
-  renderTasksUI,
+  renderTasksInProject,
   renderNonProjectsUI,
   renderTasksInHome,
   renderTasksInToday,
@@ -60,7 +60,7 @@ submitProjectBtn.addEventListener("click", (e) => {
   hideElement(addProjectFormDiv);
   hideElement(document.querySelector(".duplicateNameErrorMessage"));
   renderProjectsUI(projectsArray, tasksArray);
-  renderTasksUI(tasksArray, currentProject);
+  renderTasksInProject(tasksArray, currentProject);
   createProjectEventListeners();
 
   displayElement(addTaskBtn);
@@ -100,7 +100,7 @@ submitTaskBtn.addEventListener("click", (e) => {
   if (currentProject) {
     renderProjectsUI(projectsArray, tasksArray);
     createProjectEventListeners();
-    renderTasksUI(tasksArray, currentProject);
+    renderTasksInProject(tasksArray, currentProject);
   } else {
     renderTasksInHome(tasksArray);
   }
@@ -149,7 +149,7 @@ function createProjectEventListeners() {
       const name = projectsArray[i].projectName;
 
       currentProject = name;
-      renderTasksUI(tasksArray, currentProject);
+      renderTasksInProject(tasksArray, currentProject);
       closeAndResetForms();
       scrollTaskListToTop();
     })

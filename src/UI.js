@@ -197,7 +197,7 @@ export function renderTasksInImportant(tasksArray) {
 }
 
 // Render Tasks for Projects
-export function renderTasksUI(tasksArray, currentProject) {
+export function renderTasksInProject(tasksArray, currentProject) {
   const directoryName = document.querySelector(".directoryName");
   const taskList = document.querySelector(".task_list");
   directoryName.textContent = `${currentProject}`;

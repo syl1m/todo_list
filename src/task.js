@@ -49,6 +49,3 @@ export default function createTask(currentProject, dateFormat) {
 
   return new Task(title, details, dueDate, priority, project);
 }
-
-// Function to edit task
-// Function to mark task as complete
