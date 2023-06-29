@@ -220,6 +220,11 @@ footer {
   min-width: 50rem;
 }
 
+.completedTask {
+  opacity: 0.5;
+  background-color: grey;
+}
+
 .taskDetails {
   justify-self: right;
 }

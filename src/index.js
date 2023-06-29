@@ -61,6 +61,7 @@ submitProjectBtn.addEventListener("click", (e) => {
   hideElement(document.querySelector(".duplicateNameErrorMessage"));
   renderProjectsUI(projectsArray, tasksArray);
   renderTasksInProject(tasksArray, currentProject);
+  createTaskEventListeners();
   createProjectEventListeners();
 
   displayElement(addTaskBtn);
@@ -105,6 +106,7 @@ submitTaskBtn.addEventListener("click", (e) => {
     renderTasksInHome(tasksArray);
   }
   renderNonProjectsUI(tasksArray, dateFormat);
+  createTaskEventListeners();
 
   addProjectBtn.disabled = false;
 
@@ -150,6 +152,7 @@ function createProjectEventListeners() {
 
       currentProject = name;
       renderTasksInProject(tasksArray, currentProject);
+      createTaskEventListeners();
       closeAndResetForms();
       scrollTaskListToTop();
     })
@@ -165,6 +168,7 @@ function createNonProjectDirectoryEventListeners() {
   home.addEventListener("click", () => {
     currentProject = "";
     renderTasksInHome(tasksArray);
+    createTaskEventListeners();
     closeAndResetForms();
     scrollTaskListToTop();
   });
@@ -172,6 +176,7 @@ function createNonProjectDirectoryEventListeners() {
   today.addEventListener("click", () => {
     currentProject = "";
     renderTasksInToday(tasksArray, dateFormat);
+    createTaskEventListeners();
     closeAndResetForms();
     scrollTaskListToTop();
     hideElement(addTaskBtn);
@@ -180,6 +185,7 @@ function createNonProjectDirectoryEventListeners() {
   week.addEventListener("click", () => {
     currentProject = "";
     renderTasksInWeek(tasksArray, dateFormat);
+    createTaskEventListeners();
     closeAndResetForms();
     scrollTaskListToTop();
     hideElement(addTaskBtn);
@@ -188,6 +194,7 @@ function createNonProjectDirectoryEventListeners() {
   important.addEventListener("click", () => {
     currentProject = "";
     renderTasksInImportant(tasksArray);
+    createTaskEventListeners();
     closeAndResetForms();
     scrollTaskListToTop();
     hideElement(addTaskBtn);
@@ -197,4 +204,32 @@ function createNonProjectDirectoryEventListeners() {
 function defaultFormDateToToday() {
   const dateInput = document.getElementById("dueDate");
   dateInput.value = format(new Date(), "yyyy-MM-dd");
+}
+
+function createTaskEventListeners() {
+  const checkboxes = document.querySelectorAll(".taskCheckbox");
+  const details = document.querySelectorAll(".taskDetails");
+  const editIcons = document.querySelectorAll(".taskEditIcon");
+  const deleteIcons = document.querySelectorAll(".taskDeleteIcon");
+
+  checkboxes.forEach((checkbox) =>
+    checkbox.addEventListener("click", (e) => {
+      const i = e.target.dataset.index;
+      const taskDiv = document.querySelector(`.taskDivUI[data-index="${i}"]`);
+
+      if (checkbox.checked === true) {
+        tasksArray[i].completed = "yes";
+      } else {
+        tasksArray[i].completed = "no";
+      }
+
+      if (tasksArray[i].project) {
+        renderProjectsUI(projectsArray, tasksArray);
+        createProjectEventListeners();
+      }
+
+      renderNonProjectsUI(tasksArray, dateFormat);
+      taskDiv.classList.toggle("completedTask");
+    })
+  );
 }

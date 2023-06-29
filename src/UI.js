@@ -113,6 +113,13 @@ function createTaskDiv(tasksArray, i) {
   editIcon.classList.add("taskEditIcon");
   deleteIcon.classList.add("taskDeleteIcon");
 
+  if (tasksArray[i].completed === "yes") {
+    checkbox.checked = true;
+    taskDiv.classList.add("completedTask");
+  } else {
+    checkbox.checked = false;
+    taskDiv.classList.remove("completedTask");
+  }
   const priority = `${tasksArray[i].priority}`;
   setPriorityStyling(priority, taskDiv);
 
