@@ -261,4 +261,11 @@ function createTaskEventListeners() {
       taskDetailsDiv.scrollIntoView({ behavior: "smooth", inline: "start" });
     })
   );
+
+  editIcons.forEach((edit) =>
+    edit.addEventListener("click", (e) => {
+      const i = e.target.dataset.index;
+      const taskDiv = document.querySelector(`.taskDivUI[data-index="${i}"]`);
+    })
+  );
 }

@@ -147,5 +147,74 @@
         </div>
       </div>
     </div>
+    <div class="overlay edit-task-div">
+      <form action="" method="post" class="edit_task_form">
+        <input
+          type="text"
+          name="title-edit-task"
+          id="title-edit-task"
+          placeholder="Title: "
+          required
+          pattern=".*\S.*"
+          title="Task name must contain a non-space character"
+          maxlength="60"
+        />
+
+        <textarea
+          name="task_details_edit_task"
+          id="task_details_edit_task"
+          rows="5"
+          placeholder="Details: "
+          maxlength="250"
+        ></textarea>
+
+        <div class="dueDate">
+          <label for="dueDate_edit_task">Due Date:</label>
+          <input
+            type="date"
+            name="dueDate_edit_task"
+            id="dueDate_edit_task"
+            required
+            min="1900-01-01"
+            max="9999-12-31"
+          />
+        </div>
+
+        <div class="task_priority">
+          <legend>Priority:</legend>
+          <div class="priority_switch">
+            <input
+              type="radio"
+              name="priority"
+              id="low-edit-task"
+              value="low"
+              checked
+            />
+            <label for="low-edit-task" class="label_priority">LOW</label>
+
+            <input
+              type="radio"
+              name="priority"
+              id="medium-edit-task"
+              value="medium"
+            />
+            <label for="medium-edit-task" class="label_priority">MEDIUM</label>
+
+            <input
+              type="radio"
+              name="priority"
+              id="high-edit-task"
+              value="high"
+            />
+            <label for="high-edit-task" class="label_priority">HIGH</label>
+
+            <div class="switch_indicator"></div>
+          </div>
+        </div>
+
+        <button type="submit" class="addTaskFormBtn">Confirm Edit</button>
+        <button type="reset" class="cancelTaskFormBtn">X</button>
+      </form>
+    </div>
   </body>
 </html>
