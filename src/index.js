@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import "./style.css";
-import { format } from "date-fns";
-import createTask from "./task";
+import { format, parse } from "date-fns";
+import createTask, { getRadioCheckedValue } from "./task";
 import createProject, { checkDupProjectName } from "./project";
 import {
   hideElement,
@@ -265,7 +265,68 @@ function createTaskEventListeners() {
   editIcons.forEach((edit) =>
     edit.addEventListener("click", (e) => {
       const i = e.target.dataset.index;
-      const taskDiv = document.querySelector(`.taskDivUI[data-index="${i}"]`);
+      const editTaskDiv = document.querySelector(".edit-task-div");
+      const overlay = document.querySelector(".overlay");
+      const confirmEditTaskBtn = document.querySelector(".confirmEditTaskBtn");
+      const cancelEditTaskBtn = document.querySelector(".cancelEditTaskBtn");
+      const titleInput = document.querySelector(
+        'input[name="title-edit-task"]'
+      );
+      const detailsInput = document.querySelector(
+        'textarea[name="task_details_edit_task"]'
+      );
+      const dueDateInput = document.querySelector(
+        'input[name="dueDate_edit_task"]'
+      );
+      const priorityCheckedInput = document.querySelector(
+        `.edit_task_form input[value=${tasksArray[i].priority}]`
+      );
+
+      editTaskDiv.classList.remove("hidden");
+      overlay.classList.remove("hidden");
+      confirmEditTaskBtn.dataset.index = i;
+
+      titleInput.value = tasksArray[i].title;
+      detailsInput.value = tasksArray[i].details;
+      dueDateInput.value = format(
+        parse(tasksArray[i].dueDate, dateFormat, new Date()),
+        "yyyy-MM-dd"
+      );
+      priorityCheckedInput.checked = true;
+
+      confirmEditTaskBtn.addEventListener("click", (f) => {
+        if (!checkFormValidity("title-edit-task")) return;
+        if (!checkFormValidity("dueDate_edit_task")) return;
+        f.preventDefault();
+        const j = f.target.dataset.index;
+
+        tasksArray[j].title = titleInput.value.trim();
+        tasksArray[j].details = detailsInput.value.trim();
+        tasksArray[j].dueDate = format(
+          parse(dueDateInput.value, "yyyy-MM-dd", new Date()),
+          dateFormat
+        );
+        tasksArray[j].priority = getRadioCheckedValue("priority-edit-task");
+
+        const editTaskForm = document.querySelector(".edit_task_form");
+        editTaskForm.reset();
+
+        if (currentProject) {
+          renderTasksInProject(tasksArray, currentProject);
+        } else {
+          renderTasksInHome(tasksArray);
+        }
+        renderNonProjectsUI(tasksArray, dateFormat);
+        createTaskEventListeners();
+
+        editTaskDiv.classList.add("hidden");
+        overlay.classList.add("hidden");
+      });
+
+      cancelEditTaskBtn.addEventListener("click", () => {
+        editTaskDiv.classList.add("hidden");
+        overlay.classList.add("hidden");
+      });
     })
   );
 }

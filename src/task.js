@@ -16,7 +16,7 @@ class Task {
 }
 
 // Function to get value from radio button
-function getRadioCheckedValue(inputName) {
+export function getRadioCheckedValue(inputName) {
   const radioElements = document.getElementsByName(inputName);
   let checkedValue = "";
 
