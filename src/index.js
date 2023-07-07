@@ -20,6 +20,7 @@ const tasksArray = [];
 const projectsArray = [];
 const dateFormat = "MMM do, yyyy";
 let currentProject = "";
+let currentNonProjectDirectory = "home";
 
 // Project Form Query Selectors
 const addProjectBtn = document.querySelector(".add_project button");
@@ -54,6 +55,7 @@ submitProjectBtn.addEventListener("click", (e) => {
   const project = createProject();
   project.projectToArray(projectsArray);
   currentProject = project.projectName;
+  currentNonProjectDirectory = "";
   addProjectForm.reset();
 
   displayElement(addProjectBtn);
@@ -151,6 +153,7 @@ function createProjectEventListeners() {
       const name = projectsArray[i].projectName;
 
       currentProject = name;
+      currentNonProjectDirectory = "";
       renderTasksInProject(tasksArray, currentProject);
       createTaskEventListeners();
       closeAndResetForms();
@@ -167,6 +170,7 @@ function createNonProjectDirectoryEventListeners() {
 
   home.addEventListener("click", () => {
     currentProject = "";
+    currentNonProjectDirectory = "home";
     renderTasksInHome(tasksArray);
     createTaskEventListeners();
     closeAndResetForms();
@@ -175,6 +179,7 @@ function createNonProjectDirectoryEventListeners() {
 
   today.addEventListener("click", () => {
     currentProject = "";
+    currentNonProjectDirectory = "today";
     renderTasksInToday(tasksArray, dateFormat);
     createTaskEventListeners();
     closeAndResetForms();
@@ -184,6 +189,7 @@ function createNonProjectDirectoryEventListeners() {
 
   week.addEventListener("click", () => {
     currentProject = "";
+    currentNonProjectDirectory = "week";
     renderTasksInWeek(tasksArray, dateFormat);
     createTaskEventListeners();
     closeAndResetForms();
@@ -193,6 +199,7 @@ function createNonProjectDirectoryEventListeners() {
 
   important.addEventListener("click", () => {
     currentProject = "";
+    currentNonProjectDirectory = "important";
     renderTasksInImportant(tasksArray);
     createTaskEventListeners();
     closeAndResetForms();
@@ -313,9 +320,16 @@ function createTaskEventListeners() {
 
         if (currentProject) {
           renderTasksInProject(tasksArray, currentProject);
-        } else {
+        } else if (currentNonProjectDirectory === "home") {
           renderTasksInHome(tasksArray);
+        } else if (currentNonProjectDirectory === "today") {
+          renderTasksInToday(tasksArray, dateFormat);
+        } else if (currentNonProjectDirectory === "week") {
+          renderTasksInWeek(tasksArray, dateFormat);
+        } else if (currentNonProjectDirectory === "important") {
+          renderTasksInImportant(tasksArray);
         }
+
         renderNonProjectsUI(tasksArray, dateFormat);
         createTaskEventListeners();
 
