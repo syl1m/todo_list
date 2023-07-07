@@ -343,4 +343,33 @@ function createTaskEventListeners() {
       });
     })
   );
+
+  deleteIcons.forEach((deleteIcon) =>
+    deleteIcon.addEventListener("click", (e) => {
+      const i = e.target.dataset.index;
+      const taskProject = tasksArray[i].project;
+
+      tasksArray.splice(i, 1);
+
+      if (currentProject) {
+        renderTasksInProject(tasksArray, currentProject);
+      } else if (currentNonProjectDirectory === "home") {
+        renderTasksInHome(tasksArray);
+      } else if (currentNonProjectDirectory === "today") {
+        renderTasksInToday(tasksArray, dateFormat);
+      } else if (currentNonProjectDirectory === "week") {
+        renderTasksInWeek(tasksArray, dateFormat);
+      } else if (currentNonProjectDirectory === "important") {
+        renderTasksInImportant(tasksArray);
+      }
+
+      if (taskProject) {
+        renderProjectsUI(projectsArray, tasksArray);
+        createProjectEventListeners();
+      }
+
+      renderNonProjectsUI(tasksArray, dateFormat);
+      createTaskEventListeners();
+    })
+  );
 }
