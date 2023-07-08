@@ -209,6 +209,29 @@ footer {
   background-color: red;
 }
 
+.projectOptionsIcon {
+  position: relative;
+  display: flex;
+}
+
+.optionsDiv {
+  display: none;
+  position: absolute;
+}
+
+.projectOptionsIcon:hover .optionsDiv {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.projectEditIcon {
+}
+
+.projectDeleteIcon {
+}
+
 /* Task Render */
 .directory_header {
   display: flex;

@@ -231,6 +231,7 @@ export function renderProjectsUI(projectsArray, tasksArray) {
     const totalTasks = document.createElement("div");
     const name = document.createElement("div");
     const optionsIcon = document.createElement("div");
+    const optionsDiv = document.createElement("div");
     const editIcon = document.createElement("div");
     const deleteProject = document.createElement("div");
 
@@ -239,21 +240,29 @@ export function renderProjectsUI(projectsArray, tasksArray) {
       tasksArray
     );
     name.textContent = `${projectsArray[i].projectName}`;
-    name.classList.add("projectNameEventListener");
-    name.dataset.index = i;
     optionsIcon.textContent = ":";
     editIcon.textContent = "i";
     deleteProject.textContent = "X";
 
+    totalTasks.classList.add("projectTaskCount");
+    name.classList.add("projectNameEventListener");
+    optionsIcon.classList.add("projectOptionsIcon");
+    optionsDiv.classList.add("optionsDiv");
+    editIcon.classList.add("projectEditIcon");
+    deleteProject.classList.add("projectDeleteIcon");
+
+    name.dataset.index = i;
+    editIcon.dataset.index = i;
+    deleteProject.dataset.index = i;
+
     projectDiv.appendChild(totalTasks);
     projectDiv.appendChild(name);
     projectDiv.appendChild(optionsIcon);
-    optionsIcon.appendChild(editIcon);
-    optionsIcon.appendChild(deleteProject);
+    optionsIcon.appendChild(optionsDiv);
+    optionsDiv.appendChild(editIcon);
+    optionsDiv.appendChild(deleteProject);
 
     projectDirectory.appendChild(projectDiv);
-    // Add event listener to options icon, hidden until hover over projectdiv element
-    // Add event listeners for edit name and delete project
   }
 }
 

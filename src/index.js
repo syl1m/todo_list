@@ -147,6 +147,9 @@ function scrollTaskListToTop() {
 
 function createProjectEventListeners() {
   const projects = document.querySelectorAll(".projectNameEventListener");
+  const editIcons = document.querySelectorAll(".projectEditIcon");
+  const deleteIcons = document.querySelectorAll(".projectDeleteIcon");
+
   projects.forEach((project) =>
     project.addEventListener("click", (e) => {
       const i = e.target.dataset.index;
@@ -158,6 +161,18 @@ function createProjectEventListeners() {
       createTaskEventListeners();
       closeAndResetForms();
       scrollTaskListToTop();
+    })
+  );
+
+  editIcons.forEach((editIcon) =>
+    editIcon.addEventListener("click", (e) => {
+      const i = e.target.dataset.index;
+    })
+  );
+
+  deleteIcons.forEach((deleteIcon) =>
+    deleteIcon.addEventListener("click", (e) => {
+      const i = e.target.dataset.index;
     })
   );
 }
