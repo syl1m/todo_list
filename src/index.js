@@ -233,6 +233,33 @@ function createProjectEventListeners() {
     deleteIcon.addEventListener("click", (e) => {
       const i = e.target.dataset.index;
       const selectedProjectName = projectsArray[i].projectName;
+
+      deleteTasksInProject(selectedProjectName);
+      projectsArray.splice(i, 1);
+      renderNonProjectsUI(tasksArray, dateFormat);
+      renderProjectsUI(projectsArray, tasksArray);
+      createProjectEventListeners();
+
+      if (currentProject === selectedProjectName) {
+        renderTasksInHome(tasksArray);
+        createTaskEventListeners();
+        currentProject = "";
+        currentNonProjectDirectory = "home";
+      } else if (currentNonProjectDirectory === "home") {
+        renderTasksInHome(tasksArray);
+        createTaskEventListeners();
+      } else if (currentNonProjectDirectory === "today") {
+        renderTasksInToday(tasksArray, dateFormat);
+        createTaskEventListeners();
+      } else if (currentNonProjectDirectory === "week") {
+        renderTasksInWeek(tasksArray, dateFormat);
+        createTaskEventListeners();
+      } else if (currentNonProjectDirectory === "important") {
+        renderTasksInImportant(tasksArray);
+        createTaskEventListeners();
+      }
+
+      closeAndResetForms();
     })
   );
 }
@@ -452,5 +479,11 @@ function createTaskEventListeners() {
 function updateProjectPropertyInTasks(oldName, newName) {
   for (let i = 0; i < tasksArray.length; i++) {
     if (tasksArray[i].project === oldName) tasksArray[i].project = newName;
+  }
+}
+
+function deleteTasksInProject(deletedProject) {
+  for (let i = tasksArray.length - 1; i >= 0; i--) {
+    if (tasksArray[i].project === deletedProject) tasksArray.splice(i, 1);
   }
 }
