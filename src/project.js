@@ -17,12 +17,9 @@ export default function createProject() {
   return new Project(projectName);
 }
 
-// Function to edit project name
 // Function to prevent duplicate Project names
-export function checkDupProjectName(projectsArray) {
-  const name = document
-    .querySelector('input[name="project_name"]')
-    .value.trim();
+export function checkDupProjectName(projectsArray, element) {
+  const name = document.querySelector(`input[name="${element}"]`).value.trim();
 
   for (let i = 0; i < projectsArray.length; i++) {
     if (name === projectsArray[i].projectName) {

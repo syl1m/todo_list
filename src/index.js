@@ -14,6 +14,7 @@ import {
   renderTasksInToday,
   renderTasksInWeek,
   renderTasksInImportant,
+  renderEditProjectFormDiv,
 } from "./UI";
 
 const tasksArray = [];
@@ -47,7 +48,7 @@ addProjectBtn.addEventListener("click", () => {
 submitProjectBtn.addEventListener("click", (e) => {
   if (!checkFormValidity("project_name")) return;
   e.preventDefault();
-  if (checkDupProjectName(projectsArray)) {
+  if (checkDupProjectName(projectsArray, "project_name")) {
     displayElement(document.querySelector(".duplicateNameErrorMessage"));
     return;
   }
@@ -167,12 +168,71 @@ function createProjectEventListeners() {
   editIcons.forEach((editIcon) =>
     editIcon.addEventListener("click", (e) => {
       const i = e.target.dataset.index;
+
+      renderProjectsUI(projectsArray, tasksArray);
+      createProjectEventListeners();
+
+      const selectedProjectDiv = document.querySelector(
+        `.projectDivUI[data-index="${i}"]`
+      );
+      const selectedProjectName = projectsArray[i].projectName;
+      const editProjectDiv = renderEditProjectFormDiv(selectedProjectName);
+
+      selectedProjectDiv.parentNode.replaceChild(
+        editProjectDiv,
+        selectedProjectDiv
+      );
+      document.querySelector('input[name="edit_project_name"]').focus();
+
+      const confirmEditBtn = document.querySelector(".confirmEditProjectBtn");
+      const cancelEditBtn = document.querySelector(".cancelEditProjectBtn");
+
+      confirmEditBtn.addEventListener("click", (f) => {
+        const editedProjectName = document
+          .querySelector('input[name="edit_project_name"]')
+          .value.trim();
+
+        if (editedProjectName === selectedProjectName) {
+          editProjectDiv.parentNode.replaceChild(
+            selectedProjectDiv,
+            editProjectDiv
+          );
+          return;
+        }
+
+        if (!checkFormValidity("edit_project_name")) return;
+
+        f.preventDefault();
+        if (checkDupProjectName(projectsArray, "edit_project_name")) {
+          displayElement(document.querySelector(".dupNameErrorMsg_editForm"));
+          return;
+        }
+
+        projectsArray[i].projectName = editedProjectName;
+        updateProjectPropertyInTasks(selectedProjectName, editedProjectName);
+        renderProjectsUI(projectsArray, tasksArray);
+        createProjectEventListeners();
+
+        if (currentProject === selectedProjectName) {
+          currentProject = editedProjectName;
+          renderTasksInProject(tasksArray, currentProject);
+          createTaskEventListeners();
+        }
+      });
+
+      cancelEditBtn.addEventListener("click", () => {
+        editProjectDiv.parentNode.replaceChild(
+          selectedProjectDiv,
+          editProjectDiv
+        );
+      });
     })
   );
 
   deleteIcons.forEach((deleteIcon) =>
     deleteIcon.addEventListener("click", (e) => {
       const i = e.target.dataset.index;
+      const selectedProjectName = projectsArray[i].projectName;
     })
   );
 }
@@ -387,4 +447,10 @@ function createTaskEventListeners() {
       createTaskEventListeners();
     })
   );
+}
+
+function updateProjectPropertyInTasks(oldName, newName) {
+  for (let i = 0; i < tasksArray.length; i++) {
+    if (tasksArray[i].project === oldName) tasksArray[i].project = newName;
+  }
 }

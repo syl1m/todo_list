@@ -284,3 +284,50 @@ export function checkFormValidity(formElementName) {
   const element = document.querySelector(`input[name="${formElementName}"]`);
   return element.checkValidity();
 }
+
+// Render Edit Project Name Form and Div
+export function renderEditProjectFormDiv(currentProjectName) {
+  const formDiv = document.createElement("div");
+  const form = document.createElement("form");
+  const projectNameInput = document.createElement("input");
+  const duplicateNameErrorMsgDiv = document.createElement("div");
+  const formButtonContainer = document.createElement("div");
+  const submitBtn = document.createElement("button");
+  const cancelBtn = document.createElement("button");
+
+  formDiv.classList.add("edit_project_form_div");
+  form.classList.add("edit_project_form");
+  duplicateNameErrorMsgDiv.classList.add("dupNameErrorMsg_editForm");
+  duplicateNameErrorMsgDiv.classList.add("hidden");
+  formButtonContainer.classList.add("edit_project_form_buttons");
+  submitBtn.classList.add("confirmEditProjectBtn");
+  cancelBtn.classList.add("cancelEditProjectBtn");
+
+  form.setAttribute("method", "post");
+  projectNameInput.setAttribute("type", "text");
+  projectNameInput.setAttribute("name", "edit_project_name");
+  projectNameInput.setAttribute("id", "edit_project_name");
+  projectNameInput.setAttribute("required", "");
+  projectNameInput.setAttribute("pattern", ".*\\S.*");
+  projectNameInput.setAttribute(
+    "title",
+    "Name is required and be under 25 characters"
+  );
+  projectNameInput.setAttribute("maxlength", "25");
+  projectNameInput.value = currentProjectName;
+  duplicateNameErrorMsgDiv.textContent =
+    "This project already exists. Enter a different name.";
+  submitBtn.setAttribute("type", "submit");
+  submitBtn.textContent = "Rename";
+  cancelBtn.setAttribute("type", "reset");
+  cancelBtn.textContent = "Cancel";
+
+  formDiv.appendChild(form);
+  form.appendChild(projectNameInput);
+  form.appendChild(duplicateNameErrorMsgDiv);
+  form.appendChild(formButtonContainer);
+  formButtonContainer.appendChild(submitBtn);
+  formButtonContainer.appendChild(cancelBtn);
+
+  return formDiv;
+}
