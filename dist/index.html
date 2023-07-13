@@ -6,13 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-do List App</title>
     <script src="main.js" defer></script>
+    <script
+      src="https://kit.fontawesome.com/1e9d73a6d1.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <header>
       <div class="leftside_header">
-        <div class="sidebar_toggle">sidebar toggle image placeholder</div>
-        <div class="home_button">home button image placeholder</div>
-        <div class="searchbar">Search bar placeholder</div>
+        <i class="fa-solid fa-check-double app_logo"></i>
+        <div class="app_name">taskTracker</div>
       </div>
       <div class="rightside_header">
         <div class="darkmode_toggle">darkmode toggle placeholder</div>
@@ -22,18 +25,22 @@
       <div class="sidebar">
         <div class="task_directory">
           <div class="home nonProjectDirectoryDiv">
+            <i class="fa-solid fa-house"></i>
             <div class="nonProjectDirectory">Home</div>
             <div class="taskCount"></div>
           </div>
           <div class="today nonProjectDirectoryDiv">
+            <i class="fa-solid fa-calendar-day"></i>
             <div class="nonProjectDirectory">Today</div>
             <div class="taskCount"></div>
           </div>
           <div class="week nonProjectDirectoryDiv">
+            <i class="fa-solid fa-calendar-week"></i>
             <div class="nonProjectDirectory">Week</div>
             <div class="taskCount"></div>
           </div>
           <div class="important nonProjectDirectoryDiv">
+            <i class="fa-solid fa-clock"></i>
             <div class="nonProjectDirectory">Important</div>
             <div class="taskCount"></div>
           </div>
@@ -62,13 +69,15 @@
             </form>
           </div>
           <div class="add_project">
-            <button>Add Project</button>
+            <button>
+              <i class="fa-regular fa-square-plus"></i> Add Project
+            </button>
           </div>
         </div>
         <footer>
           Copyright © 2023 Sheng-Yau Lim
           <a href="https://github.com/syl1m/todo_list">
-            github icon placeholder
+            <i class="fa-brands fa-github fa-lg"></i>
           </a>
         </footer>
       </div>
@@ -138,12 +147,14 @@
               </div>
             </div>
 
-            <button type="submit" class="addTaskFormBtn">ADD TO DO</button>
-            <button type="reset" class="cancelTaskFormBtn">X</button>
+            <button type="submit" class="addTaskFormBtn">ADD TASK</button>
+            <button type="reset" class="cancelTaskFormBtn">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
           </form>
         </div>
         <div class="addTaskBtn">
-          <button>Add Task</button>
+          <button><i class="fa-regular fa-square-plus"></i> Add Task</button>
         </div>
       </div>
     </div>
@@ -213,7 +224,9 @@
         </div>
 
         <button type="submit" class="confirmEditTaskBtn">Confirm Edit</button>
-        <button type="reset" class="cancelEditTaskBtn">X</button>
+        <button type="reset" class="cancelEditTaskBtn">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </form>
     </div>
     <div class="overlay hidden"></div>

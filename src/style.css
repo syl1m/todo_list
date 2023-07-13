@@ -1,7 +1,37 @@
+:root {
+  --color-surface-100: #121212;
+  --color-surface-200: #282828;
+  --color-surface-300: #3f3f3f;
+  --primary-accent-color: #4bb2f9;
+  --font-color: rgb(255, 255, 255);
+  --white: rgb(255, 255, 255);
+  --black: #121212;
+}
+
+@font-face {
+  font-family: "Futura";
+  src: url("./futura-pt-cufonfonts/FuturaCyrillicMedium.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Futura_bold";
+  src: url("./futura-pt-cufonfonts/FuturaCyrillicBold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
 * {
+  font-family: "Futura", system-ui, "Segoe UI", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: var(--font-color);
+}
+
+i {
+  color: var(--primary-accent-color);
 }
 
 .hidden {
@@ -20,7 +50,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: yellow;
+  background-color: var(--color-surface-200);
   position: fixed;
   height: 3rem;
   width: 100vw;
@@ -38,7 +68,7 @@ header {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  background-color: aqua;
+  background-color: var(--color-surface-300);
   position: fixed;
   top: 3rem;
   height: calc(100vh - 3rem);
@@ -49,7 +79,7 @@ header {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  background-color: plum;
+  background-color: var(--color-surface-100);
   gap: 0.5rem;
   position: fixed;
   top: 3rem;
@@ -72,12 +102,22 @@ textarea {
   font-size: 100%;
 }
 
+button {
+  background-color: inherit;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: none;
+  width: 100%;
+}
+
 input {
   appearance: none;
+  color: var(--black);
 }
 
 textarea {
   resize: none;
+  color: var(--black);
 }
 
 .add_task_form_div {
@@ -113,7 +153,7 @@ textarea {
 }
 
 .priority_switch:before {
-  background-color: grey;
+  background-color: var(--color-surface-300);
   content: "";
   position: absolute;
   left: 0;
@@ -135,7 +175,7 @@ textarea {
 }
 
 .label_priority:hover {
-  color: white;
+  color: var(--primary-accent-color);
 }
 
 .switch_indicator {
@@ -194,29 +234,42 @@ textarea {
 }
 
 footer {
-  padding-top: 3rem;
+  margin: -1rem;
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--color-surface-200);
+  font-size: 0.8rem;
 }
 
 /* Add Project Form */
 /* Project Render */
 .projectDivUI {
   display: grid;
-  grid-template-columns: 1fr 8rem 1fr;
+  grid-template-columns: 1fr 7rem 1fr;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
   word-wrap: break-word;
   align-items: center;
-  background-color: red;
+  background-color: var(--color-surface-300);
 }
 
 .projectOptionsIcon {
-  position: relative;
-  display: flex;
+  display: none;
 }
 
 .optionsDiv {
   display: none;
   position: absolute;
+}
+
+.projectDivUI:hover .projectOptionsIcon {
+  position: relative;
+  display: flex;
+  justify-self: right;
+}
+
+.projectOptionsIcon:hover {
+  left: -1.2rem;
 }
 
 .projectOptionsIcon:hover .optionsDiv {
@@ -226,10 +279,13 @@ footer {
   align-items: center;
 }
 
-.projectEditIcon {
-}
-
-.projectDeleteIcon {
+.taskCount,
+.projectTaskCount {
+  background-color: var(--primary-accent-color);
+  border-radius: 50%;
+  text-align: center;
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 /* Task Render */
@@ -251,20 +307,20 @@ footer {
 }
 
 .taskDivUI {
-  background-color: purple;
+  background-color: var(--color-surface-300);
   display: grid;
-  grid-template-columns: 1rem 25rem 1fr 6rem 2rem 3rem;
+  grid-template-columns: 1fr 25fr 5fr 8fr 1fr 1fr;
   padding: 1rem;
   gap: 1rem;
   align-items: center;
   position: relative;
   word-wrap: break-word;
-  min-width: 50rem;
+  width: 100%;
 }
 
 .completedTask {
   opacity: 0.5;
-  background-color: grey;
+  background-color: var(--color-surface-200);
 }
 
 .taskDetails {
@@ -287,16 +343,16 @@ input[type="checkbox"] {
   height: 1rem;
   width: 1rem;
   border-radius: 4px;
-  background-color: white;
+  background-color: var(--white);
   cursor: pointer;
 }
 
 input[type="checkbox"]:hover {
-  background-color: grey;
+  background-color: var(--primary-accent-color);
 }
 
 input[type="checkbox"]:checked {
-  background-color: blue;
+  background-color: var(--primary-accent-color);
 }
 
 input[type="checkbox"]:after {
@@ -316,3 +372,5 @@ input[type="checkbox"]:after {
 input[type="checkbox"]:checked:after {
   display: block;
 }
+
+/* Animations */

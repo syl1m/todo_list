@@ -91,15 +91,15 @@ function createTaskDiv(tasksArray, i) {
   const title = document.createElement("div");
   const details = document.createElement("div");
   const dueDate = document.createElement("div");
-  const editIcon = document.createElement("div");
-  const deleteIcon = document.createElement("div");
+  const editIcon = document.createElement("i");
+  const deleteIcon = document.createElement("i");
 
   checkbox.setAttribute("type", "checkbox");
   title.textContent = `${tasksArray[i].title}`;
   details.textContent = "DETAILS";
   dueDate.textContent = `${tasksArray[i].dueDate}`;
-  editIcon.textContent = "edit";
-  deleteIcon.textContent = "delete";
+  editIcon.setAttribute("class", "fa-solid fa-pen-to-square");
+  deleteIcon.setAttribute("class", "fa-solid fa-trash-can");
 
   checkbox.dataset.index = i;
   details.dataset.index = i;
@@ -230,19 +230,19 @@ export function renderProjectsUI(projectsArray, tasksArray) {
 
     const totalTasks = document.createElement("div");
     const name = document.createElement("div");
-    const optionsIcon = document.createElement("div");
+    const optionsIcon = document.createElement("i");
     const optionsDiv = document.createElement("div");
-    const editIcon = document.createElement("div");
-    const deleteProject = document.createElement("div");
+    const editIcon = document.createElement("i");
+    const deleteProject = document.createElement("i");
 
     totalTasks.textContent = countTasksInProject(
       projectsArray[i].projectName,
       tasksArray
     );
     name.textContent = `${projectsArray[i].projectName}`;
-    optionsIcon.textContent = ":";
-    editIcon.textContent = "i";
-    deleteProject.textContent = "X";
+    optionsIcon.setAttribute("class", "fa-solid fa-ellipsis-vertical");
+    editIcon.setAttribute("class", "fa-solid fa-pen-to-square");
+    deleteProject.setAttribute("class", "fa-solid fa-trash-can");
 
     totalTasks.classList.add("projectTaskCount");
     name.classList.add("projectNameEventListener");
