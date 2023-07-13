@@ -45,22 +45,12 @@ i {
   backdrop-filter: blur(10px);
 }
 
-/* Header */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--color-surface-200);
-  position: fixed;
-  height: 3rem;
-  width: 100vw;
-  top: 0;
-  padding: 1rem;
-}
-
-.leftside_header {
+.header {
   display: flex;
   gap: 1rem;
+  background-color: var(--color-surface-200);
+  margin: -1rem -1rem 1rem -1rem;
+  padding: 1rem;
 }
 
 /* Main content */
@@ -70,8 +60,7 @@ header {
   padding: 1rem;
   background-color: var(--color-surface-300);
   position: fixed;
-  top: 3rem;
-  height: calc(100vh - 3rem);
+  height: 100vh;
   width: 15rem;
 }
 
@@ -82,9 +71,8 @@ header {
   background-color: var(--color-surface-100);
   gap: 0.5rem;
   position: fixed;
-  top: 3rem;
   left: 15rem;
-  height: calc(100vh - 3rem);
+  height: 100vh;
   width: calc(100vw - 15rem);
 }
 
@@ -385,6 +373,11 @@ input[type="checkbox"]:after {
 
 input[type="checkbox"]:checked:after {
   display: block;
+}
+
+/* Material icon from Google */
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
 }
 
 /* Animations */
