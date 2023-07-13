@@ -217,8 +217,15 @@ textarea {
 }
 
 .nonProjectDirectoryDiv {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1.5rem 1fr 2rem;
+  gap: 0.5rem;
+  align-items: center;
+  justify-items: center;
+}
+
+.nonProjectDirectoryDiv .nonProjectDirectory {
+  justify-self: left;
 }
 
 .project_section {
@@ -227,6 +234,7 @@ textarea {
   flex: 1;
   min-height: 0;
   padding-top: 1rem;
+  gap: 1rem;
 }
 
 .project_directory {
@@ -234,7 +242,7 @@ textarea {
 }
 
 footer {
-  margin: -1rem;
+  margin: 1rem -1rem -1rem -1rem;
   text-align: center;
   padding: 1rem;
   background-color: var(--color-surface-200);
@@ -247,7 +255,7 @@ footer {
   display: grid;
   grid-template-columns: 1fr 7rem 1fr;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.3rem;
   word-wrap: break-word;
   align-items: center;
   background-color: var(--color-surface-300);
@@ -269,7 +277,7 @@ footer {
 }
 
 .projectOptionsIcon:hover {
-  left: -1.2rem;
+  left: -1.8rem;
 }
 
 .projectOptionsIcon:hover .optionsDiv {
@@ -283,9 +291,15 @@ footer {
 .projectTaskCount {
   background-color: var(--primary-accent-color);
   border-radius: 50%;
-  text-align: center;
   height: 1.5rem;
   width: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.noTasks {
+  opacity: 0;
 }
 
 /* Task Render */

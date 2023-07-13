@@ -251,6 +251,12 @@ export function renderProjectsUI(projectsArray, tasksArray) {
     editIcon.classList.add("projectEditIcon");
     deleteProject.classList.add("projectDeleteIcon");
 
+    if (totalTasks.textContent === "") {
+      totalTasks.classList.add("noTasks");
+    } else {
+      totalTasks.classList.remove("noTasks");
+    }
+
     name.dataset.index = i;
     editIcon.dataset.index = i;
     deleteProject.dataset.index = i;
@@ -272,11 +278,19 @@ export function renderNonProjectsUI(tasksArray, dateFormat) {
   const todayTaskCount = document.querySelector(".today .taskCount");
   const weekTaskCount = document.querySelector(".week .taskCount");
   const importantTaskCount = document.querySelector(".important .taskCount");
+  const taskCountDivs = document.querySelectorAll(".taskCount");
 
   homeTaskCount.textContent = countTasksInHome(tasksArray);
   todayTaskCount.textContent = countTasksInToday(tasksArray, dateFormat);
   weekTaskCount.textContent = countTasksInWeek(tasksArray, dateFormat);
   importantTaskCount.textContent = countTasksInImportant(tasksArray);
+  taskCountDivs.forEach((taskCount) => {
+    if (taskCount.textContent === "") {
+      taskCount.classList.add("noTasks");
+    } else {
+      taskCount.classList.remove("noTasks");
+    }
+  });
 }
 
 // Function to check form validity

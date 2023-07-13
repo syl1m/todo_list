@@ -123,6 +123,7 @@ cancelTaskBtn.addEventListener("click", () => {
   addProjectBtn.disabled = false;
 });
 
+renderNonProjectsUI(tasksArray, dateFormat);
 createNonProjectDirectoryEventListeners();
 
 // Functions
