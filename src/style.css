@@ -115,8 +115,19 @@ textarea {
   color: var(--black);
 }
 
+label,
+legend {
+  color: var(--black);
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
 .add_task_form_div {
   padding: 0 1rem;
+  position: relative;
 }
 
 .edit-task-div {
@@ -131,6 +142,31 @@ textarea {
 .edit_task_form {
   display: flex;
   flex-direction: column;
+  background-color: var(--white);
+  padding: 1rem;
+}
+
+#title,
+#title-edit-task,
+textarea,
+legend,
+label {
+  padding: 0.4rem 0;
+}
+
+#title,
+#title-edit-task {
+  padding-right: 1rem;
+}
+
+form .dueDate {
+  padding-top: 1rem;
+}
+
+.dueDate input {
+  padding: 0.4rem;
+  border: 2px solid var(--primary-accent-color);
+  border-radius: 5px;
 }
 
 .task_priority {
@@ -166,6 +202,7 @@ textarea {
   cursor: pointer;
   transition: color 200ms ease-out;
   z-index: 1;
+  color: var(--white);
 }
 
 .label_priority:hover {
@@ -201,6 +238,37 @@ textarea {
 #high-edit-task:checked ~ .switch_indicator {
   background: palevioletred;
   transform: translate(9rem, -50%);
+}
+
+.addTaskFormBtn,
+.confirmEditTaskBtn {
+  color: var(--black);
+  background-color: green;
+}
+
+.addTaskFormBtn {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  width: fit-content;
+}
+
+.cancelTaskFormBtn,
+.cancelEditTaskBtn {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  top: 0;
+  right: 1rem;
+  opacity: 0.8;
+}
+
+.cancelEditTaskBtn {
+  right: 0;
+}
+
+.fa-xmark {
+  color: red;
 }
 
 /* Sidebar */
@@ -371,7 +439,7 @@ footer {
 }
 
 .taskDivUI {
-  background-color: var(--color-surface-300);
+  background-color: var(--color-surface-200);
   display: grid;
   grid-template-columns: 1fr 25fr 5fr 8fr 1fr 1fr;
   padding: 1rem;
@@ -468,7 +536,9 @@ input[type="checkbox"]:checked:after {
 }
 
 footer,
-.label_priority {
+.label_priority,
+.addTaskFormBtn,
+.confirmEditTaskBtn {
   font-size: 0.8rem;
 }
 
@@ -504,4 +574,9 @@ footer,
 .project_form_buttons,
 .edit_project_form_buttons {
   font-size: 0.9rem;
+}
+
+#title,
+#title-edit-task {
+  font-weight: 700;
 }
