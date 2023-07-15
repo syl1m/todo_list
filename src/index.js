@@ -25,6 +25,7 @@ let currentNonProjectDirectory = "home";
 
 // Project Form Query Selectors
 const addProjectBtn = document.querySelector(".add_project button");
+const addProjectBtnDiv = document.querySelector(".add_project");
 const addProjectFormDiv = document.querySelector(".add_project_form_div");
 const addProjectForm = document.querySelector(".add_project_form");
 const submitProjectBtn = document.querySelector("button.addProjectBtn");
@@ -32,6 +33,7 @@ const cancelProjectBtn = document.querySelector("button.cancelProjectBtn");
 
 // Task Form Query Selectors
 const addTaskBtn = document.querySelector(".addTaskBtn button");
+const addTaskBtnDiv = document.querySelector(".addTaskBtn");
 const addTaskFormDiv = document.querySelector(".add_task_form_div");
 const addTaskForm = document.querySelector(".add_task_form");
 const submitTaskBtn = document.querySelector("button.addTaskFormBtn");
@@ -40,7 +42,7 @@ const cancelTaskBtn = document.querySelector("button.cancelTaskFormBtn");
 // Event listeners
 addProjectBtn.addEventListener("click", () => {
   displayElement(addProjectFormDiv);
-  hideElement(addProjectBtn);
+  hideElement(addProjectBtnDiv);
   document.querySelector('input[name="project_name"]').focus();
   addTaskBtn.disabled = true;
 });
@@ -59,7 +61,7 @@ submitProjectBtn.addEventListener("click", (e) => {
   currentNonProjectDirectory = "";
   addProjectForm.reset();
 
-  displayElement(addProjectBtn);
+  displayElement(addProjectBtnDiv);
   hideElement(addProjectFormDiv);
   hideElement(document.querySelector(".duplicateNameErrorMessage"));
   renderProjectsUI(projectsArray, tasksArray);
@@ -67,7 +69,7 @@ submitProjectBtn.addEventListener("click", (e) => {
   createTaskEventListeners();
   createProjectEventListeners();
 
-  displayElement(addTaskBtn);
+  displayElement(addTaskBtnDiv);
   addTaskBtn.disabled = false;
 
   const lastProjectElement =
@@ -76,7 +78,7 @@ submitProjectBtn.addEventListener("click", (e) => {
 });
 
 cancelProjectBtn.addEventListener("click", () => {
-  displayElement(addProjectBtn);
+  displayElement(addProjectBtnDiv);
   hideElement(addProjectFormDiv);
   hideElement(document.querySelector(".duplicateNameErrorMessage"));
   addTaskBtn.disabled = false;
@@ -84,7 +86,7 @@ cancelProjectBtn.addEventListener("click", () => {
 
 addTaskBtn.addEventListener("click", () => {
   displayElement(addTaskFormDiv);
-  hideElement(addTaskBtn);
+  hideElement(addTaskBtnDiv);
   defaultFormDateToToday();
   document.querySelector('input[name="title"]').focus();
   addProjectBtn.disabled = true;
@@ -99,7 +101,7 @@ submitTaskBtn.addEventListener("click", (e) => {
   task.taskToArray(tasksArray);
   addTaskForm.reset();
 
-  displayElement(addTaskBtn);
+  displayElement(addTaskBtnDiv);
   hideElement(addTaskFormDiv);
   if (currentProject) {
     renderProjectsUI(projectsArray, tasksArray);
@@ -118,7 +120,7 @@ submitTaskBtn.addEventListener("click", (e) => {
 });
 
 cancelTaskBtn.addEventListener("click", () => {
-  displayElement(addTaskBtn);
+  displayElement(addTaskBtnDiv);
   hideElement(addTaskFormDiv);
   addProjectBtn.disabled = false;
 });
@@ -133,8 +135,8 @@ function closeAndResetForms() {
   addProjectBtn.disabled = false;
   addTaskBtn.disabled = false;
 
-  displayElement(addProjectBtn);
-  displayElement(addTaskBtn);
+  displayElement(addProjectBtnDiv);
+  displayElement(addTaskBtnDiv);
   hideElement(addProjectFormDiv);
   hideElement(document.querySelector(".duplicateNameErrorMessage"));
   hideElement(addTaskFormDiv);
@@ -287,7 +289,7 @@ function createNonProjectDirectoryEventListeners() {
     createTaskEventListeners();
     closeAndResetForms();
     scrollTaskListToTop();
-    hideElement(addTaskBtn);
+    hideElement(addTaskBtnDiv);
   });
 
   week.addEventListener("click", () => {
@@ -297,7 +299,7 @@ function createNonProjectDirectoryEventListeners() {
     createTaskEventListeners();
     closeAndResetForms();
     scrollTaskListToTop();
-    hideElement(addTaskBtn);
+    hideElement(addTaskBtnDiv);
   });
 
   important.addEventListener("click", () => {
@@ -307,7 +309,7 @@ function createNonProjectDirectoryEventListeners() {
     createTaskEventListeners();
     closeAndResetForms();
     scrollTaskListToTop();
-    hideElement(addTaskBtn);
+    hideElement(addTaskBtnDiv);
   });
 }
 
