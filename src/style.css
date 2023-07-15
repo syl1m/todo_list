@@ -80,8 +80,7 @@ i,
 }
 
 /* Buttons */
-.addTaskBtn button,
-.add_project button {
+.addTaskBtn button {
   padding: 0.5rem 1rem;
   display: flex;
   justify-content: center;
@@ -95,6 +94,7 @@ input,
 textarea {
   font-family: inherit;
   font-size: 100%;
+  border: none;
 }
 
 button {
@@ -245,6 +245,47 @@ footer {
 }
 
 /* Add Project Form */
+.add_project_form,
+.edit_project_form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  margin-left: 2rem;
+}
+
+#project_name,
+#edit_project_name {
+  padding: 0.3rem;
+  border-radius: 8px;
+}
+
+.duplicateNameErrorMessage,
+.dupNameErrorMsg_editForm {
+  text-align: center;
+  color: red;
+}
+
+.project_form_buttons,
+.edit_project_form_buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.project_form_buttons .addProjectBtn,
+.edit_project_form_buttons .confirmEditProjectBtn {
+  background-color: green;
+  padding: 0.3rem;
+}
+
+.project_form_buttons .cancelProjectBtn,
+.edit_project_form_buttons .cancelEditProjectBtn {
+  background-color: red;
+  padding: 0.3rem;
+}
+
 /* Project Render */
 .projectDivUI {
   display: grid;
@@ -254,6 +295,19 @@ footer {
   word-wrap: break-word;
   align-items: center;
   background-color: var(--color-surface-300);
+}
+
+.add_project button {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  align-items: center;
+  text-align: start;
+}
+
+.add_project i {
+  font-size: 1.4rem;
 }
 
 .projectOptionsIcon {
@@ -429,16 +483,25 @@ footer,
   font-size: 1.25rem;
 }
 
-.projectDivUI {
+.projectDivUI,
+#project_name,
+#edit_project_name,
+.add_project button {
   font-size: 1.1rem;
 }
 
 .taskCount,
-.projectTaskCount {
+.projectTaskCount,
+.duplicateNameErrorMessage,
+.dupNameErrorMsg_editForm {
   font-size: 0.9rem;
 }
 
-.add_project button,
 .addTaskBtn button {
   font-size: 1.1rem;
+}
+
+.project_form_buttons,
+.edit_project_form_buttons {
+  font-size: 0.9rem;
 }
