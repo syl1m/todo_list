@@ -349,7 +349,7 @@ function createTaskEventListeners() {
     detail.addEventListener("click", (e) => {
       const i = e.target.dataset.index;
       const taskDiv = document.querySelector(`.taskDivUI[data-index="${i}"]`);
-      const taskDetailsDiv = document.createElement("div");
+      const taskDetailsDiv = document.createElement("textarea");
       const previousTaskDetailsDiv = document.querySelector(".taskDetailsDiv");
 
       if (previousTaskDetailsDiv) {
@@ -362,13 +362,15 @@ function createTaskEventListeners() {
       }
 
       if (tasksArray[i].details) {
-        taskDetailsDiv.textContent = `${tasksArray[i].details}`;
+        taskDetailsDiv.value = `${tasksArray[i].details}`;
       } else {
-        taskDetailsDiv.textContent = "No details";
+        taskDetailsDiv.value = "No details";
       }
 
       taskDetailsDiv.classList.add("taskDetailsDiv");
       taskDetailsDiv.dataset.index = i;
+      taskDetailsDiv.readOnly = true;
+      taskDetailsDiv.setAttribute("rows", "4");
       taskDiv.insertAdjacentElement("afterend", taskDetailsDiv);
       taskDetailsDiv.scrollIntoView({ behavior: "smooth", inline: "start" });
     })
