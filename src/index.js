@@ -1,6 +1,8 @@
 /* eslint-disable no-use-before-define */
 import "./style.css";
+import "./darkmodeToggle.css";
 import { format, parse } from "date-fns";
+import createDarkModeToggle from "./darkmodeToggle";
 import createTask, { getRadioCheckedValue } from "./task";
 import createProject, { checkDupProjectName } from "./project";
 import {
@@ -22,6 +24,14 @@ const projectsArray = [];
 const dateFormat = "MMM do, yyyy";
 let currentProject = "";
 let currentNonProjectDirectory = "home";
+
+// Add Light/Dark Theme toggle
+(function createDarkModeToggleInDOM() {
+  const toggleWrapper = createDarkModeToggle();
+  const directoryHeader = document.querySelector(".directory_header");
+
+  directoryHeader.appendChild(toggleWrapper);
+})();
 
 // Project Form Query Selectors
 const addProjectBtn = document.querySelector(".add_project button");

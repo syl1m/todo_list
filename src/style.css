@@ -2,11 +2,32 @@
   --color-surface-100: #121212;
   --color-surface-200: #282828;
   --color-surface-300: #3f3f3f;
+  --color-surface-400: #575757;
+  --color-surface-500: #717171;
+  --color-surface-600: #8b8b8b;
   --primary-accent-color: #4bb2f9;
+  --primary-color-500: #a8d4fc;
+  --mixed-color-200: #303539;
   --font-color: rgb(255, 255, 255);
   --white: rgb(255, 255, 255);
   --black: #121212;
   --transparent-color: rgba(0, 0, 0, 0);
+}
+
+body.light_theme {
+  --color-surface-100: #f7f7f7;
+  --color-surface-200: #bbdcfd;
+  --color-surface-300: #eee;
+  --color-surface-500: #eee;
+  --primary-accent-color: #4bb2f9;
+  --primary-color-500: #a8d4fc;
+  --mixed-color-200: rgb(255, 255, 255);
+  --font-color: #121212;
+  --white: rgb(255, 255, 255);
+}
+
+body.light_theme .dueDate input {
+  color-scheme: light;
 }
 
 @font-face {
@@ -95,6 +116,8 @@ textarea {
   font-family: inherit;
   font-size: 100%;
   border: none;
+  background-color: var(--mixed-color-200);
+  color: (--font-color);
 }
 
 button {
@@ -107,17 +130,15 @@ button {
 
 input {
   appearance: none;
-  color: var(--black);
 }
 
 textarea {
   resize: none;
-  color: var(--black);
 }
 
 label,
 legend {
-  color: var(--black);
+  color: var(--font-color);
 }
 
 input:focus,
@@ -142,7 +163,8 @@ textarea:focus {
 .edit_task_form {
   display: flex;
   flex-direction: column;
-  background-color: var(--white);
+  background-color: var(--mixed-color-200);
+  border-radius: 5px;
   padding: 1rem;
 }
 
@@ -167,6 +189,7 @@ form .dueDate {
   padding: 0.4rem;
   border: 2px solid var(--primary-accent-color);
   border-radius: 5px;
+  color-scheme: dark;
 }
 
 .task_priority {
@@ -184,7 +207,7 @@ form .dueDate {
 }
 
 .priority_switch:before {
-  background-color: var(--color-surface-300);
+  background-color: var(--color-surface-200);
   content: "";
   position: absolute;
   left: 0;
@@ -242,7 +265,6 @@ form .dueDate {
 
 .addTaskFormBtn,
 .confirmEditTaskBtn {
-  color: var(--black);
   background-color: green;
 }
 
@@ -450,9 +472,20 @@ footer {
   width: 100%;
 }
 
+.taskDetailsDiv {
+  margin-left: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--mixed-color-200);
+  border-radius: 5px;
+}
+
 .completedTask {
-  opacity: 0.5;
-  background-color: var(--color-surface-200);
+  opacity: 0.9;
+  background-color: var(--color-surface-500);
+}
+
+.completedTask .taskTitle {
+  text-decoration: line-through;
 }
 
 .taskDetails {
@@ -475,7 +508,7 @@ footer {
   border-left: 0.5rem solid red;
 }
 
-input[type="checkbox"] {
+.taskCheckbox {
   height: 1rem;
   width: 1rem;
   border-radius: 4px;
@@ -483,15 +516,15 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-input[type="checkbox"]:hover {
+.taskCheckbox:hover {
+  background-color: var(--primary-color-500);
+}
+
+.taskCheckbox:checked {
   background-color: var(--primary-accent-color);
 }
 
-input[type="checkbox"]:checked {
-  background-color: var(--primary-accent-color);
-}
-
-input[type="checkbox"]:after {
+.taskCheckbox:after {
   content: "";
   display: none;
   position: absolute;
@@ -505,15 +538,8 @@ input[type="checkbox"]:after {
   transform: rotate(45deg);
 }
 
-input[type="checkbox"]:checked:after {
+.taskCheckbox:checked:after {
   display: block;
-}
-
-/* Dark/light mode toggle */
-.darkModeToggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .material-symbols-outlined {
