@@ -1,13 +1,19 @@
 :root {
-  --color-surface-100: #121212;
-  --color-surface-200: #282828;
-  --color-surface-300: #3f3f3f;
-  --color-surface-400: #575757;
-  --color-surface-500: #717171;
-  --color-surface-600: #8b8b8b;
+  --header-bg-color: #282828;
+  --footer-bg-color: #282828;
+  --sidebar-bg-color: #3f3f3f;
+  --body-bg-color: #121212;
+  --task-bg-color: #282828;
+  --task-details-color: #303539;
+  --completed-task-color: #717171;
+  --input-field-color: #303539;
+  --project-input-color: #717171;
+  --task-form-color: #303539;
+  --priority-slider-color: #282828;
+  --task-checkbox-hover-color: orange;
+  --task-checkbox-checked-color: orange;
+  --task-form-border-color: #4bb2f9;
   --primary-accent-color: #4bb2f9;
-  --primary-color-500: #a8d4fc;
-  --mixed-color-200: #303539;
   --font-color: rgb(255, 255, 255);
   --white: rgb(255, 255, 255);
   --black: #121212;
@@ -15,15 +21,21 @@
 }
 
 body.light_theme {
-  --color-surface-100: #f7f7f7;
-  --color-surface-200: #bbdcfd;
-  --color-surface-300: #eee;
-  --color-surface-500: #eee;
-  --primary-accent-color: #4bb2f9;
-  --primary-color-500: #a8d4fc;
-  --mixed-color-200: rgb(255, 255, 255);
+  --header-bg-color: #bbdcfd;
+  --footer-bg-color: #bbdcfd;
+  --sidebar-bg-color: #eee;
+  --body-bg-color: #f7f7f7;
+  --task-bg-color: #eee;
+  --task-details-color: #bbdcfd;
+  --completed-task-color: #717171;
+  --input-field-color: #eee;
+  --project-input-color: #f7f7f7;
+  --task-form-color: #eee;
+  --priority-slider-color: #8b8b8b;
+  --task-checkbox-hover-color: orange;
+  --task-checkbox-checked-color: orange;
+  --task-form-border-color: #4bb2f9;
   --font-color: #121212;
-  --white: rgb(255, 255, 255);
 }
 
 body.light_theme .dueDate input {
@@ -73,7 +85,7 @@ i,
   grid-template-columns: 2rem 1fr 1rem;
   align-items: center;
   gap: 1rem;
-  background-color: var(--color-surface-200);
+  background-color: var(--header-bg-color);
   margin: -1rem -1rem 1rem -1rem;
   padding: 1rem;
 }
@@ -82,7 +94,7 @@ i,
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  background-color: var(--color-surface-300);
+  background-color: var(--sidebar-bg-color);
   position: fixed;
   height: 100vh;
   width: 17rem;
@@ -92,7 +104,7 @@ i,
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  background-color: var(--color-surface-100);
+  background-color: var(--body-bg-color);
   gap: 0.5rem;
   position: fixed;
   left: 17rem;
@@ -116,7 +128,7 @@ textarea {
   font-family: inherit;
   font-size: 100%;
   border: none;
-  background-color: var(--mixed-color-200);
+  background-color: var(--input-field-color);
   color: (--font-color);
 }
 
@@ -163,9 +175,10 @@ textarea:focus {
 .edit_task_form {
   display: flex;
   flex-direction: column;
-  background-color: var(--mixed-color-200);
+  background-color: var(--task-form-color);
   border-radius: 5px;
   padding: 1rem;
+  border: 2px solid var(--task-form-border-color);
 }
 
 #title,
@@ -207,7 +220,7 @@ form .dueDate {
 }
 
 .priority_switch:before {
-  background-color: var(--color-surface-200);
+  background-color: var(--priority-slider-color);
   content: "";
   position: absolute;
   left: 0;
@@ -225,7 +238,7 @@ form .dueDate {
   cursor: pointer;
   transition: color 200ms ease-out;
   z-index: 1;
-  color: var(--white);
+  color: var(--font-color);
 }
 
 .label_priority:hover {
@@ -233,7 +246,7 @@ form .dueDate {
 }
 
 .switch_indicator {
-  background-color: palegreen;
+  background-color: green;
   opacity: 0.5;
   width: 3.5rem;
   height: 3.5rem;
@@ -248,18 +261,18 @@ form .dueDate {
 
 #low:checked ~ .switch_indicator,
 #low-edit-task:checked ~ .switch_indicator {
-  background: palegreen;
+  background: green;
 }
 
 #medium:checked ~ .switch_indicator,
 #medium-edit-task:checked ~ .switch_indicator {
-  background: palegoldenrod;
+  background: yellow;
   transform: translate(4.5rem, -50%);
 }
 
 #high:checked ~ .switch_indicator,
 #high-edit-task:checked ~ .switch_indicator {
-  background: palevioletred;
+  background: red;
   transform: translate(9rem, -50%);
 }
 
@@ -283,6 +296,7 @@ form .dueDate {
   top: 0;
   right: 1rem;
   opacity: 0.8;
+  background-color: var(--transparent-color);
 }
 
 .cancelEditTaskBtn {
@@ -331,7 +345,7 @@ footer {
   margin: 1rem -1rem -1rem -1rem;
   text-align: center;
   padding: 1rem;
-  background-color: var(--color-surface-200);
+  background-color: var(--footer-bg-color);
 }
 
 /* Add Project Form */
@@ -348,6 +362,8 @@ footer {
 #edit_project_name {
   padding: 0.3rem;
   border-radius: 8px;
+  background-color: var(--project-input-color);
+  border: 2px solid var(--primary-accent-color);
 }
 
 .duplicateNameErrorMessage,
@@ -384,7 +400,6 @@ footer {
   padding: 0.5rem 1rem;
   word-wrap: break-word;
   align-items: center;
-  background-color: var(--color-surface-300);
 }
 
 .add_project button {
@@ -461,7 +476,7 @@ footer {
 }
 
 .taskDivUI {
-  background-color: var(--color-surface-200);
+  background-color: var(--task-bg-color);
   display: grid;
   grid-template-columns: 1fr 25fr 5fr 8fr 1fr 1fr;
   padding: 1rem;
@@ -475,13 +490,13 @@ footer {
 .taskDetailsDiv {
   margin-left: 0.5rem;
   padding: 0.5rem;
-  background-color: var(--mixed-color-200);
+  background-color: var(--task-details-color);
   border-radius: 5px;
 }
 
 .completedTask {
-  opacity: 0.9;
-  background-color: var(--color-surface-500);
+  opacity: 0.5;
+  background-color: var(--completed-task-color);
 }
 
 .completedTask .taskTitle {
@@ -490,6 +505,10 @@ footer {
 
 .taskDetails {
   justify-self: right;
+}
+
+.taskDueDate {
+  justify-self: center;
 }
 
 .addTaskBtn {
@@ -513,15 +532,16 @@ footer {
   width: 1rem;
   border-radius: 4px;
   background-color: var(--white);
+  border: 2px solid var(--task-checkbox-checked-color);
   cursor: pointer;
 }
 
 .taskCheckbox:hover {
-  background-color: var(--primary-color-500);
+  background-color: var(--task-checkbox-hover-color);
 }
 
 .taskCheckbox:checked {
-  background-color: var(--primary-accent-color);
+  background-color: var(--task-checkbox-checked-color);
 }
 
 .taskCheckbox:after {

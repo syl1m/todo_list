@@ -2,10 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  --theme-toggle-dark: #303539;
+  --theme-toggle-light: rgb(255, 255, 255);
+  --theme-accent-color: #4bb2f9;
 }
 
 .darkmode_checkbox_label {
-  background-color: var(--mixed-color-200);
+  background-color: var(--theme-toggle-dark);
+  border: 1px solid var(--theme-accent-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -18,7 +22,7 @@
 }
 
 .darkmode_checkbox_label .darkmode_slider {
-  background-color: var(--primary-accent-color);
+  background-color: var(--theme-accent-color);
   width: 1.8rem;
   height: 1.8rem;
   position: absolute;
@@ -32,7 +36,7 @@
 }
 
 .darkmode_checkbox_input:checked + .darkmode_checkbox_label {
-  background-color: var(--white);
+  background-color: var(--theme-toggle-light);
 }
 
 i.sun {
