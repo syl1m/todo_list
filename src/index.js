@@ -98,6 +98,8 @@ addProjectBtn.addEventListener("click", () => {
   hideElement(addProjectBtnDiv);
   document.querySelector('input[name="project_name"]').focus();
   addTaskBtn.disabled = true;
+  renderProjectsUI(projectsArray, tasksArray);
+  createProjectEventListeners();
 });
 
 submitProjectBtn.addEventListener("click", (e) => {
@@ -227,6 +229,9 @@ function createProjectEventListeners() {
 
       renderProjectsUI(projectsArray, tasksArray);
       createProjectEventListeners();
+      addProjectForm.reset();
+      displayElement(addProjectBtnDiv);
+      hideElement(addProjectFormDiv);
 
       const selectedProjectDiv = document.querySelector(
         `.projectDivUI[data-index="${i}"]`
