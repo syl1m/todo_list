@@ -83,6 +83,7 @@ i,
 .header {
   display: grid;
   grid-template-columns: 2rem 1fr 1rem;
+  grid-template-rows: 2rem;
   align-items: center;
   gap: 1rem;
   background-color: var(--header-bg-color);
@@ -98,6 +99,7 @@ i,
   position: fixed;
   height: 100vh;
   width: 17rem;
+  z-index: 1;
 }
 
 .task_container {
@@ -318,6 +320,7 @@ form .dueDate {
 .project_title {
   display: grid;
   grid-template-columns: 1.5rem 1fr 2rem;
+  grid-template-rows: 2rem;
   gap: 0.5rem;
   align-items: center;
   justify-items: center;
@@ -346,6 +349,10 @@ footer {
   text-align: center;
   padding: 1rem;
   background-color: var(--footer-bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 /* Add Project Form */
@@ -567,6 +574,11 @@ footer {
 }
 
 /* Animations */
+.sidebar,
+.task_container {
+  transition: all 0.5s ease;
+}
+
 /* Font Styling */
 .header {
   font-size: 1.6rem;
@@ -575,10 +587,17 @@ footer {
 
 .app_logo {
   font-size: 2rem;
+  color: var(--white);
 }
 
 .collapse_sidebar_icon {
   transform: rotateY(180deg);
+}
+
+.collapse_sidebar_icon,
+.expand_sidebar_icon {
+  color: var(--white);
+  font-size: 1.5rem;
 }
 
 footer,
@@ -625,4 +644,37 @@ footer,
 #title,
 #title-edit-task {
   font-weight: 700;
+}
+
+/* Collapsed Sidebar */
+.sidebar.closed {
+  width: 3.5rem;
+}
+
+.sidebar.closed + .task_container,
+.sidebar.hoverable + .task_container {
+  width: calc(100vw - 3.5rem);
+  left: 3.5rem;
+}
+
+.sidebar.closed .app_logo,
+.sidebar.closed .app_name,
+.sidebar.closed .nonProjectDirectory,
+.sidebar.closed .taskCount,
+.sidebar.closed .project_title_name,
+.sidebar.closed .project_directory,
+.sidebar.closed .add_project_form_div,
+.sidebar.closed .add_project,
+.sidebar.closed .footer_text {
+  display: none;
+}
+
+.sidebar.closed .header {
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+
+.footer_text,
+.add_project button div {
+  white-space: nowrap;
 }

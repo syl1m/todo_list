@@ -33,6 +33,49 @@ let currentNonProjectDirectory = "home";
   directoryHeader.appendChild(toggleWrapper);
 })();
 
+// Toggle sidebar open or closed with button and expand closed sidebar upon hover
+(function toggleSidebar() {
+  const sidebar = document.querySelector(".sidebar");
+  const collapseIcon = document.querySelector(".collapse_sidebar_icon");
+  const expandIcon = document.querySelector(".expand_sidebar_icon");
+  const mql = window.matchMedia("(max-width: 800px)");
+
+  collapseIcon.addEventListener("click", () => {
+    sidebar.classList.add("closed");
+    sidebar.classList.add("hoverable");
+    collapseIcon.classList.add("hidden");
+    expandIcon.classList.remove("hidden");
+  });
+
+  expandIcon.addEventListener("click", () => {
+    sidebar.classList.remove("closed");
+    sidebar.classList.remove("hoverable");
+    collapseIcon.classList.remove("hidden");
+    expandIcon.classList.add("hidden");
+  });
+
+  sidebar.addEventListener("mouseenter", () => {
+    if (sidebar.classList.contains("hoverable")) {
+      sidebar.classList.remove("closed");
+    }
+  });
+
+  sidebar.addEventListener("mouseleave", () => {
+    if (sidebar.classList.contains("hoverable")) {
+      sidebar.classList.add("closed");
+    }
+  });
+
+  mql.addEventListener("change", (e) => {
+    if (e.matches) {
+      sidebar.classList.add("closed");
+      sidebar.classList.add("hoverable");
+      collapseIcon.classList.add("hidden");
+      expandIcon.classList.remove("hidden");
+    }
+  });
+})();
+
 // Project Form Query Selectors
 const addProjectBtn = document.querySelector(".add_project button");
 const addProjectBtnDiv = document.querySelector(".add_project");
