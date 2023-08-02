@@ -5,6 +5,7 @@ import { format, parse } from "date-fns";
 import createDarkModeToggle from "./darkmodeToggle";
 import createTask, { getRadioCheckedValue } from "./task";
 import createProject, { checkDupProjectName } from "./project";
+import saveToStorage, { retrieveFromLocalStorage } from "./localStorage";
 import {
   hideElement,
   displayElement,
@@ -19,8 +20,7 @@ import {
   renderEditProjectFormDiv,
 } from "./UI";
 
-const tasksArray = [];
-const projectsArray = [];
+const { tasksArray, projectsArray } = retrieveFromLocalStorage();
 const dateFormat = "MMM do, yyyy";
 let currentProject = "";
 let currentNonProjectDirectory = "home";
@@ -130,6 +130,8 @@ submitProjectBtn.addEventListener("click", (e) => {
   const lastProjectElement =
     document.querySelector(".project_directory").lastElementChild;
   lastProjectElement.scrollIntoView({ behavior: "smooth", inline: "start" });
+
+  saveToStorage(tasksArray, projectsArray);
 });
 
 cancelProjectBtn.addEventListener("click", () => {
@@ -172,6 +174,8 @@ submitTaskBtn.addEventListener("click", (e) => {
 
   const lastTaskElement = document.querySelector(".task_list").lastElementChild;
   lastTaskElement.scrollIntoView({ behavior: "smooth", inline: "start" });
+
+  saveToStorage(tasksArray, projectsArray);
 });
 
 cancelTaskBtn.addEventListener("click", () => {
@@ -181,7 +185,11 @@ cancelTaskBtn.addEventListener("click", () => {
 });
 
 renderNonProjectsUI(tasksArray, dateFormat);
+renderProjectsUI(projectsArray, tasksArray);
+renderTasksInHome(tasksArray);
 createNonProjectDirectoryEventListeners();
+createProjectEventListeners();
+createTaskEventListeners();
 
 // Functions
 function closeAndResetForms() {
@@ -279,6 +287,8 @@ function createProjectEventListeners() {
           renderTasksInProject(tasksArray, currentProject);
           createTaskEventListeners();
         }
+
+        saveToStorage(tasksArray, projectsArray);
       });
 
       cancelEditBtn.addEventListener("click", () => {
@@ -321,6 +331,7 @@ function createProjectEventListeners() {
       }
 
       closeAndResetForms();
+      saveToStorage(tasksArray, projectsArray);
     })
   );
 }
@@ -400,6 +411,7 @@ function createTaskEventListeners() {
 
       renderNonProjectsUI(tasksArray, dateFormat);
       taskDiv.classList.toggle("completedTask");
+      saveToStorage(tasksArray, projectsArray);
     })
   );
 
@@ -500,6 +512,7 @@ function createTaskEventListeners() {
 
         editTaskDiv.classList.add("hidden");
         overlay.classList.add("hidden");
+        saveToStorage(tasksArray, projectsArray);
       });
 
       cancelEditTaskBtn.addEventListener("click", () => {
@@ -535,6 +548,7 @@ function createTaskEventListeners() {
 
       renderNonProjectsUI(tasksArray, dateFormat);
       createTaskEventListeners();
+      saveToStorage(tasksArray, projectsArray);
     })
   );
 }
