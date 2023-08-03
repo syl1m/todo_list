@@ -325,9 +325,9 @@ function createProjectEventListeners() {
       createProjectEventListeners();
 
       if (lastProjectIndex) {
-        if (lastProjectIndex < i) {
+        if (+lastProjectIndex < +i) {
           styleLastSelectedProjectDirectory(lastProjectIndex);
-        } else if (lastProjectIndex > i) {
+        } else if (+lastProjectIndex > +i) {
           lastProjectIndex -= 1;
           styleLastSelectedProjectDirectory(lastProjectIndex);
         }
