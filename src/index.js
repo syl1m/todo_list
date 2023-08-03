@@ -98,8 +98,10 @@ addProjectBtn.addEventListener("click", () => {
   hideElement(addProjectBtnDiv);
   document.querySelector('input[name="project_name"]').focus();
   addTaskBtn.disabled = true;
+  const lastProjectIndex = getLastSelectedProjectIndex();
   renderProjectsUI(projectsArray, tasksArray);
   createProjectEventListeners();
+  styleLastSelectedProjectDirectory(lastProjectIndex);
 });
 
 submitProjectBtn.addEventListener("click", (e) => {
@@ -131,6 +133,7 @@ submitProjectBtn.addEventListener("click", (e) => {
     document.querySelector(".project_directory").lastElementChild;
   lastProjectElement.scrollIntoView({ behavior: "smooth", inline: "start" });
 
+  styleSelectedDirectory(lastProjectElement);
   saveToStorage(tasksArray, projectsArray);
 });
 
@@ -221,6 +224,9 @@ function createProjectEventListeners() {
     project.addEventListener("click", (e) => {
       const i = e.target.dataset.index;
       const name = projectsArray[i].projectName;
+      const projectDiv = document.querySelector(
+        `.projectDivUI[data-index="${i}"]`
+      );
 
       currentProject = name;
       currentNonProjectDirectory = "";
@@ -228,15 +234,18 @@ function createProjectEventListeners() {
       createTaskEventListeners();
       closeAndResetForms();
       scrollTaskListToTop();
+      styleSelectedDirectory(projectDiv);
     })
   );
 
   editIcons.forEach((editIcon) =>
     editIcon.addEventListener("click", (e) => {
       const i = e.target.dataset.index;
+      const lastProjectIndex = getLastSelectedProjectIndex();
 
       renderProjectsUI(projectsArray, tasksArray);
       createProjectEventListeners();
+      styleLastSelectedProjectDirectory(lastProjectIndex);
       addProjectForm.reset();
       displayElement(addProjectBtnDiv);
       hideElement(addProjectFormDiv);
@@ -281,6 +290,7 @@ function createProjectEventListeners() {
         updateProjectPropertyInTasks(selectedProjectName, editedProjectName);
         renderProjectsUI(projectsArray, tasksArray);
         createProjectEventListeners();
+        styleLastSelectedProjectDirectory(lastProjectIndex);
 
         if (currentProject === selectedProjectName) {
           currentProject = editedProjectName;
@@ -304,6 +314,7 @@ function createProjectEventListeners() {
     deleteIcon.addEventListener("click", (e) => {
       const i = e.target.dataset.index;
       const selectedProjectName = projectsArray[i].projectName;
+      let lastProjectIndex = getLastSelectedProjectIndex();
 
       deleteTasksInProject(selectedProjectName);
       projectsArray.splice(i, 1);
@@ -311,11 +322,21 @@ function createProjectEventListeners() {
       renderProjectsUI(projectsArray, tasksArray);
       createProjectEventListeners();
 
+      if (lastProjectIndex) {
+        if (lastProjectIndex < i) {
+          styleLastSelectedProjectDirectory(lastProjectIndex);
+        } else if (lastProjectIndex > i) {
+          lastProjectIndex -= 1;
+          styleLastSelectedProjectDirectory(lastProjectIndex);
+        }
+      }
+
       if (currentProject === selectedProjectName) {
         renderTasksInHome(tasksArray);
         createTaskEventListeners();
         currentProject = "";
         currentNonProjectDirectory = "home";
+        document.querySelector(".home").classList.add("selectedDirectory");
       } else if (currentNonProjectDirectory === "home") {
         renderTasksInHome(tasksArray);
         createTaskEventListeners();
@@ -349,6 +370,7 @@ function createNonProjectDirectoryEventListeners() {
     createTaskEventListeners();
     closeAndResetForms();
     scrollTaskListToTop();
+    styleSelectedDirectory(home);
   });
 
   today.addEventListener("click", () => {
@@ -359,6 +381,7 @@ function createNonProjectDirectoryEventListeners() {
     closeAndResetForms();
     scrollTaskListToTop();
     hideElement(addTaskBtnDiv);
+    styleSelectedDirectory(today);
   });
 
   week.addEventListener("click", () => {
@@ -369,6 +392,7 @@ function createNonProjectDirectoryEventListeners() {
     closeAndResetForms();
     scrollTaskListToTop();
     hideElement(addTaskBtnDiv);
+    styleSelectedDirectory(week);
   });
 
   important.addEventListener("click", () => {
@@ -379,6 +403,7 @@ function createNonProjectDirectoryEventListeners() {
     closeAndResetForms();
     scrollTaskListToTop();
     hideElement(addTaskBtnDiv);
+    styleSelectedDirectory(important);
   });
 }
 
@@ -421,6 +446,11 @@ function createTaskEventListeners() {
       const taskDiv = document.querySelector(`.taskDivUI[data-index="${i}"]`);
       const taskDetailsDiv = document.createElement("textarea");
       const previousTaskDetailsDiv = document.querySelector(".taskDetailsDiv");
+      const previousTaskDetail = document.querySelector(".selectedTaskDetail");
+
+      if (previousTaskDetail) {
+        previousTaskDetail.classList.remove("selectedTaskDetail");
+      }
 
       if (previousTaskDetailsDiv) {
         const previousTaskIndex = previousTaskDetailsDiv.dataset.index;
@@ -437,6 +467,7 @@ function createTaskEventListeners() {
         taskDetailsDiv.value = "No details";
       }
 
+      detail.classList.add("selectedTaskDetail");
       taskDetailsDiv.classList.add("taskDetailsDiv");
       taskDetailsDiv.dataset.index = i;
       taskDetailsDiv.readOnly = true;
@@ -562,5 +593,34 @@ function updateProjectPropertyInTasks(oldName, newName) {
 function deleteTasksInProject(deletedProject) {
   for (let i = tasksArray.length - 1; i >= 0; i--) {
     if (tasksArray[i].project === deletedProject) tasksArray.splice(i, 1);
+  }
+}
+
+function styleSelectedDirectory(directory) {
+  const previousDirectory = document.querySelector(".selectedDirectory");
+  if (previousDirectory) {
+    previousDirectory.classList.remove("selectedDirectory");
+  }
+  directory.classList.add("selectedDirectory");
+}
+
+function getLastSelectedProjectIndex() {
+  const currentProjectDirectoryDiv = document.querySelector(
+    ".projectDivUI.selectedDirectory"
+  );
+
+  if (currentProjectDirectoryDiv) {
+    const i = currentProjectDirectoryDiv.dataset.index;
+    return i;
+  }
+  return null;
+}
+
+function styleLastSelectedProjectDirectory(index) {
+  if (index) {
+    const projectDiv = document.querySelector(
+      `.projectDivUI[data-index="${index}"]`
+    );
+    projectDiv.classList.add("selectedDirectory");
   }
 }
