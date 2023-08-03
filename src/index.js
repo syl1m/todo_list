@@ -164,8 +164,10 @@ submitTaskBtn.addEventListener("click", (e) => {
   displayElement(addTaskBtnDiv);
   hideElement(addTaskFormDiv);
   if (currentProject) {
+    const lastProjectIndex = getLastSelectedProjectIndex();
     renderProjectsUI(projectsArray, tasksArray);
     createProjectEventListeners();
+    styleLastSelectedProjectDirectory(lastProjectIndex);
     renderTasksInProject(tasksArray, currentProject);
   } else {
     renderTasksInHome(tasksArray);
@@ -430,8 +432,10 @@ function createTaskEventListeners() {
       }
 
       if (tasksArray[i].project) {
+        const lastProjectIndex = getLastSelectedProjectIndex();
         renderProjectsUI(projectsArray, tasksArray);
         createProjectEventListeners();
+        styleLastSelectedProjectDirectory(lastProjectIndex);
       }
 
       renderNonProjectsUI(tasksArray, dateFormat);
@@ -573,8 +577,10 @@ function createTaskEventListeners() {
       }
 
       if (taskProject) {
+        const lastProjectIndex = getLastSelectedProjectIndex();
         renderProjectsUI(projectsArray, tasksArray);
         createProjectEventListeners();
+        styleLastSelectedProjectDirectory(lastProjectIndex);
       }
 
       renderNonProjectsUI(tasksArray, dateFormat);
