@@ -339,6 +339,7 @@ function createProjectEventListeners() {
         currentProject = "";
         currentNonProjectDirectory = "home";
         document.querySelector(".home").classList.add("selectedDirectory");
+        highlightProjectCategoryName();
       } else if (currentNonProjectDirectory === "home") {
         renderTasksInHome(tasksArray);
         createTaskEventListeners();
@@ -608,6 +609,7 @@ function styleSelectedDirectory(directory) {
     previousDirectory.classList.remove("selectedDirectory");
   }
   directory.classList.add("selectedDirectory");
+  highlightProjectCategoryName();
 }
 
 function getLastSelectedProjectIndex() {
@@ -628,5 +630,20 @@ function styleLastSelectedProjectDirectory(index) {
       `.projectDivUI[data-index="${index}"]`
     );
     projectDiv.classList.add("selectedDirectory");
+  }
+}
+
+function highlightProjectCategoryName() {
+  const projectDirectorySelected = document.querySelector(
+    ".projectDivUI.selectedDirectory"
+  );
+  if (projectDirectorySelected) {
+    document
+      .querySelector(".project_title")
+      .classList.add("projectDirectorySelected");
+  } else {
+    document
+      .querySelector(".project_title")
+      .classList.remove("projectDirectorySelected");
   }
 }

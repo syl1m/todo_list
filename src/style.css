@@ -423,6 +423,7 @@ footer {
 
 .projectOptionsIcon {
   display: none;
+  color: var(--font-color);
 }
 
 .optionsDiv {
@@ -619,17 +620,41 @@ footer {
 .projectDivUI,
 .add_project button,
 .addTaskBtn button {
-  transition: background 0.2s ease-out;
+  transition: all 0.2s ease-out;
   border-radius: 8px;
 }
 
 .nonProjectDirectoryDiv:hover,
 .project_title:hover,
-.projectDivUI:hover,
 .add_project button:hover,
-.addTaskBtn button:hover,
-.selectedDirectory {
+.selectedDirectory,
+.projectDirectorySelected {
   background-color: var(--header-bg-color);
+  cursor: pointer;
+}
+
+.projectDivUI.selectedDirectory {
+  background-color: inherit;
+  cursor: pointer;
+}
+
+.projectDivUI:hover {
+  background-color: rgb(230, 190, 138, 0.9);
+  cursor: pointer;
+}
+
+.projectDivUI.selectedDirectory .projectNameEventListener {
+  color: #8a80ff;
+  transition: all 0.2s ease-out;
+}
+
+.projectDivUI.selectedDirectory .projectTaskCount {
+  background-color: #8a80ff;
+  transition: all 0.2s ease-out;
+}
+
+.addTaskBtn button:hover {
+  background-color: rgba(0, 128, 0, 0.8);
   cursor: pointer;
 }
 
