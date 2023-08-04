@@ -76,6 +76,14 @@ let currentNonProjectDirectory = "home";
   });
 })();
 
+// Toggle Project list open or closed
+(function toggleProjectList() {
+  const projectList = document.querySelector(".project_title");
+  projectList.addEventListener("click", () => {
+    projectList.classList.toggle("closed");
+  });
+})();
+
 // Project Form Query Selectors
 const addProjectBtn = document.querySelector(".add_project button");
 const addProjectBtnDiv = document.querySelector(".add_project");

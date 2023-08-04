@@ -767,6 +767,7 @@ footer,
 .sidebar.closed .nonProjectDirectory,
 .sidebar.closed .taskCount,
 .sidebar.closed .project_title_name,
+.sidebar.closed .toggleProjectList,
 .sidebar.closed .project_directory,
 .sidebar.closed .add_project_form_div,
 .sidebar.closed .add_project,
@@ -782,4 +783,17 @@ footer,
 .footer_text,
 .add_project button div {
   white-space: nowrap;
+}
+
+/* Collapsed Project List */
+.project_title.closed + .project_directory {
+  display: none;
+}
+
+.toggleProjectList {
+  transition: all 0.3s ease-out;
+}
+
+.project_title.closed .toggleProjectList {
+  transform: scaleY(-1);
 }
