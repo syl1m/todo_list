@@ -15,6 +15,7 @@
   --task-form-border-color: #4bb2f9;
   --primary-accent-color: #4bb2f9;
   --font-color: rgb(255, 255, 255);
+  --task-hover-color: #a3a0a0;
   --white: rgb(255, 255, 255);
   --black: #121212;
   --transparent-color: rgba(0, 0, 0, 0);
@@ -36,6 +37,7 @@ body.light_theme {
   --task-checkbox-checked-color: orange;
   --task-form-border-color: #4bb2f9;
   --font-color: #121212;
+  --task-hover-color: rgba(0, 0, 0, 0.2);
 }
 
 body.light_theme .dueDate input {
@@ -181,7 +183,7 @@ textarea:focus {
   background-color: var(--task-form-color);
   border-radius: 5px;
   padding: 1rem;
-  border: 2px solid var(--task-form-border-color);
+  box-shadow: 2px 2px 4px 1px var(--task-hover-color);
 }
 
 #title,
@@ -281,7 +283,17 @@ form .dueDate {
 
 .addTaskFormBtn,
 .confirmEditTaskBtn {
+  border: 2px solid green;
+  color: green;
+  padding: 0.3rem;
+  transition: all 0.2s ease-out;
+}
+
+.addTaskFormBtn:hover,
+.confirmEditTaskBtn:hover {
   background-color: green;
+  color: var(--white);
+  cursor: pointer;
 }
 
 .addTaskFormBtn {
@@ -308,6 +320,7 @@ form .dueDate {
 
 .fa-xmark {
   color: red;
+  transition: all 0.2s ease-out;
 }
 
 /* Sidebar */
@@ -388,14 +401,32 @@ footer {
 
 .project_form_buttons .addProjectBtn,
 .edit_project_form_buttons .confirmEditProjectBtn {
-  background-color: green;
+  border: 2px solid green;
+  color: green;
   padding: 0.3rem;
+  transition: all 0.2s ease-out;
 }
 
 .project_form_buttons .cancelProjectBtn,
 .edit_project_form_buttons .cancelEditProjectBtn {
-  background-color: red;
+  border: 2px solid red;
+  color: red;
   padding: 0.3rem;
+  transition: all 0.2s ease-out;
+}
+
+.project_form_buttons .addProjectBtn:hover,
+.edit_project_form_buttons .confirmEditProjectBtn:hover {
+  background-color: green;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.project_form_buttons .cancelProjectBtn:hover,
+.edit_project_form_buttons .cancelEditProjectBtn:hover {
+  background-color: red;
+  color: var(--white);
+  cursor: pointer;
 }
 
 /* Project Render */
@@ -475,7 +506,7 @@ footer {
 }
 
 .task_list {
-  padding: 0 1rem;
+  padding: 0.5rem 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -682,6 +713,22 @@ footer {
   transform: scale(1.2);
   color: var(--primary-accent-color);
   cursor: pointer;
+}
+
+.taskDivUI:hover {
+  transform: scale(1.003);
+  box-shadow: 2px 2px 4px 1px var(--task-hover-color);
+  transition: all 0.2s ease-out;
+}
+
+.cancelTaskFormBtn:hover,
+.cancelEditTaskBtn:hover {
+  cursor: pointer;
+}
+
+.cancelTaskFormBtn:hover .fa-xmark,
+.cancelEditTaskBtn:hover .fa-xmark {
+  transform: scale(1.3) rotate(180deg);
 }
 
 /* Font Styling */
