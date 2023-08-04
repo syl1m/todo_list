@@ -218,7 +218,7 @@ function scrollTaskListToTop() {
 }
 
 function createProjectEventListeners() {
-  const projects = document.querySelectorAll(".projectNameEventListener");
+  const projects = document.querySelectorAll(".projectDivUI");
   const editIcons = document.querySelectorAll(".projectEditIcon");
   const deleteIcons = document.querySelectorAll(".projectDeleteIcon");
 
@@ -226,9 +226,6 @@ function createProjectEventListeners() {
     project.addEventListener("click", (e) => {
       const i = e.target.dataset.index;
       const name = projectsArray[i].projectName;
-      const projectDiv = document.querySelector(
-        `.projectDivUI[data-index="${i}"]`
-      );
 
       currentProject = name;
       currentNonProjectDirectory = "";
@@ -236,7 +233,7 @@ function createProjectEventListeners() {
       createTaskEventListeners();
       closeAndResetForms();
       scrollTaskListToTop();
-      styleSelectedDirectory(projectDiv);
+      styleSelectedDirectory(project);
     })
   );
 
@@ -244,6 +241,7 @@ function createProjectEventListeners() {
     editIcon.addEventListener("click", (e) => {
       const i = e.target.dataset.index;
       const lastProjectIndex = getLastSelectedProjectIndex();
+      e.stopPropagation();
 
       renderProjectsUI(projectsArray, tasksArray);
       createProjectEventListeners();
@@ -317,6 +315,7 @@ function createProjectEventListeners() {
       const i = e.target.dataset.index;
       const selectedProjectName = projectsArray[i].projectName;
       let lastProjectIndex = getLastSelectedProjectIndex();
+      e.stopPropagation();
 
       deleteTasksInProject(selectedProjectName);
       projectsArray.splice(i, 1);

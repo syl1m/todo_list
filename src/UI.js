@@ -257,6 +257,7 @@ export function renderProjectsUI(projectsArray, tasksArray) {
       totalTasks.classList.remove("noTasks");
     }
 
+    totalTasks.dataset.index = i;
     name.dataset.index = i;
     editIcon.dataset.index = i;
     deleteProject.dataset.index = i;
