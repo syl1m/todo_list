@@ -16,6 +16,8 @@ taskTracker is a to do list application created using vanilla JavaScript.  It ut
 * Task counts are updated for each folder in real time
 * Create, edit, and delete projects
 * Projects and tasks are saved using localStorage
+* UI can be toggled between light and dark mode
+* UI sidebar can be toggled on or off
 
 # Technologies Used
 
